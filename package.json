@@ -1,0 +1,29 @@
+{
+  "name": "meetapp",
+  "version": "1.0.0",
+  "description": "My doozie Nuxt.js project",
+  "author": "iamsahebgiri",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.11.0",
+    "bootstrap": "^4.5.0",
+    "bootstrap-vue": "^2.15.0",
+    "js-cookie": "^2.2.1",
+    "nuxt": "^2.13.2",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5",
+    "spotify-web-api-js": "^1.4.0",
+    "vue-plyr": "^5.1.3"
+  },
+  "devDependencies": {
+    "node-sass": "^4.14.1",
+    "nodemon": "^1.19.4",
+    "sass-loader": "^7.3.1"
+  }
+}
