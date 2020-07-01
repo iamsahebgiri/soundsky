@@ -1,6 +1,7 @@
 export const state = () => ({
     currentSong: '',
-    songs: []
+    songs: [],
+    accessToken: ''
 })
 
 export const mutations = {
@@ -9,5 +10,9 @@ export const mutations = {
     },
     setSongs(state,param) {
         state.songs.push(param)
-    }
+    },
+    setAccessToken(state,param) {
+        state.accessToken = param;
+    },
+
 }

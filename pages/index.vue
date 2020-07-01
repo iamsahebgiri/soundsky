@@ -1,7 +1,7 @@
 <template>
   <div>
     <HomeComponent />
-    <h3>New Releases</h3>
+    <h3>Featured</h3>
     <div v-if="loadingNew" class="d-flex justify-content-center">
       <div class="spinner-border text-primary" role="status">
         <span class="sr-only">Loading...</span>
@@ -30,19 +30,16 @@
     <div class="content d-flex flex-wrap">
       <Category v-for="item in categories" :key="item.id" v-bind:item="item" />
     </div>
-    <div class="spacer"></div>
+    <div class="spacer end"></div>
   </div>
 </template>
 <script>
-import * as SpotifyWebApi from "spotify-web-api-js";
 import axios from "axios";
 
 import HomeComponent from "~/components/HomeComponent";
 import Song from "~/components/Song";
 import Album from "~/components/Album";
 import Category from "~/components/Category";
-
-let spotify = new SpotifyWebApi();
 
 export default {
   data() {
@@ -63,24 +60,42 @@ export default {
     Category
   },
   mounted() {
-    axios.get("/api/token").then(res => {
-      spotify.setAccessToken(res.data);
-
-      spotify.getFeaturedPlaylists({ country: "IN" }, (error, response) => {
-        this.featuredPlaylists = response.playlists.items;
-        this.loadingEditor = false;
-      });
-
-      spotify.getCategories({ country: "IN" }, (error, response) => {
-        this.categories = response.categories.items;
-        console.log(response.categories.items);
-        this.loadingCat = false;
-      });
-      spotify.getNewReleases({ country: "IN" }, (error, response) => {
-        this.newReleases = response.albums.items;
-        console.log(response.albums.items);
-        this.loadingNew = false;
-      });
+    console.log("Index mounted...");
+    axios.get("http://localhost:9000/getAccessToken").then(res => {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${res.data}`
+        }
+      };
+      axios
+        .all([
+          axios.get(
+            "https://api.spotify.com/v1/browse/categories?country=IN&limit=50",
+            config
+          ),
+          axios.get(
+            "https://api.spotify.com/v1/browse/featured-playlists?country=IN",
+            config
+          ),
+          axios.get(
+            "https://api.spotify.com/v1/browse/new-releases?country=IN&limit=50",
+            config
+          )
+        ])
+        .then(
+          axios.spread((categories, featured, newReleases) => {
+            this.categories = categories.data.categories.items;
+            this.newReleases = newReleases.data.albums.items;
+            this.featuredPlaylists = featured.data.playlists.items;
+            this.loadingCat = false;
+            this.loadingNew = false;
+            this.loadingEditor = false;
+            console.log(categories, featured, newReleases);
+          })
+        )
+        .catch(err => {
+          console.log(err);
+        });
     });
   }
 };
@@ -91,5 +106,8 @@ h3 {
 }
 .spacer {
   padding: 20px 0px;
+}
+.end {
+  margin-bottom: 85px;
 }
 </style>

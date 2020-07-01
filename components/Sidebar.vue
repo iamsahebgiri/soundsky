@@ -9,47 +9,42 @@
             <span class="iconify" data-icon="ion:home-outline" data-inline="true"></span>Home
           </li>
         </nuxt-link>
-        <nuxt-link to="/artist" class="my-nav-item">
+        <nuxt-link to="/category/mood" class="my-nav-item">
           <li>
-            <span class="iconify" data-icon="ion:people-outline" data-inline="false"></span>Artists
+            <span class="iconify" data-icon="ion:musical-notes-outline" data-inline="false"></span>Mood
           </li>
         </nuxt-link>
-        <nuxt-link to="/category" class="my-nav-item">
-          <li>
-            <span class="iconify" data-icon="ion:musical-notes-outline" data-inline="false"></span>Category
-          </li>
-        </nuxt-link>
-        <nuxt-link to="/playlist/37i9dQZEVXbMDoHDwVN2tF" class="my-nav-item">
+        <nuxt-link to="/playlist/37i9dQZEVXbLRQDuF5jeBp" class="my-nav-item">
           <li>
             <span class="iconify" data-icon="ion:flash-outline" data-inline="false"></span>Trendings
           </li>
         </nuxt-link>
 
-        <a href="#" class="my-nav-item">
-          <li>
-            <span class="iconify" data-icon="ion:heart-outline" data-inline="false"></span>Liked Song
-          </li>
-        </a>
       </ul>
     </div>
     <div class="menu">
       <p class="nav-group-title">Playlists</p>
       <ul class="my-nav playlists">
-        <a href="#" class="my-nav-item">
+        <nuxt-link to="/playlist/37i9dQZEVXbMDoHDwVN2tF" class="my-nav-item">
           <li>
             <span class="iconify" data-icon="ion:folder-outline" data-inline="false"></span>Top 50
           </li>
-        </a>
-        <a href="#" class="my-nav-item">
-          <li>
-            <span class="iconify" data-icon="ion:folder-outline" data-inline="false"></span>Viral Hits
-          </li>
-        </a>
-        <a href="#" class="my-nav-item">
+        </nuxt-link>
+        <nuxt-link to="/category/bollywood" class="my-nav-item">
           <li>
             <span class="iconify" data-icon="ion:folder-outline" data-inline="false"></span>Bollywood
           </li>
-        </a>
+        </nuxt-link>
+        <nuxt-link to="/category/romance" class="my-nav-item">
+          <li>
+            <span class="iconify" data-icon="ion:folder-outline" data-inline="false"></span>Romance
+          </li>
+        </nuxt-link>
+        <nuxt-link to="/category/punjabi" class="my-nav-item">
+          <li>
+            <span class="iconify" data-icon="ion:folder-outline" data-inline="false"></span>Punjabi
+          </li>
+        </nuxt-link>
       </ul>
     </div>
   </div>
@@ -64,7 +59,7 @@
 }
 .logo {
   height: 35px;
-  margin:20px 10px;
+  margin: 20px 10px;
 }
 
 .my-nav {

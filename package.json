@@ -8,13 +8,16 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "lambda-serve": "netlify-lambda serve functions",
+    "lambda-build": "netlify-lambda build functions"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.11.0",
     "bootstrap": "^4.5.0",
     "bootstrap-vue": "^2.15.0",
     "js-cookie": "^2.2.1",
+    "netlify-lambda": "^1.6.3",
     "nuxt": "^2.13.2",
     "request": "^2.88.2",
     "request-promise": "^4.2.5",

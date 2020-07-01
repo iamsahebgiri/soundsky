@@ -1,14 +1,17 @@
 <template>
   <div>
-    <HomeComponent />
-    <div class="playlistInfo text-center">
+    <div class="topbox light pb-3 pt-3">
+      <TopBar />
+      <Shortcuts></Shortcuts>
+    </div>
+    <div class="playlistInfo text-center" :style="{background:primaryColor}">
       <div class="playlistImg">
         <img v-if="!isLoading" v-bind:src="playlistThumbnail" height="200px" width="200px" />
       </div>
       <br />
       <div class="playlistText">
         <h3>{{ playlistName }}</h3>
-        {{ playlistDescription }}
+        <p>{{ playlistDescription }}</p>
         <br />
       </div>
     </div>
@@ -23,55 +26,71 @@
         <SongPlaylist v-if="(item.track.preview_url) !== null" v-bind:item="item" />
       </div>
     </div>
-    <div class="spacer"></div>
+    <div class="spacer end"></div>
   </div>
 </template>
 
 <script>
-import * as SpotifyWebApi from 'spotify-web-api-js';
-import axios from 'axios';
+import axios from "axios";
 
-let spotify = new SpotifyWebApi();
-
-import HomeComponent from '~/components/HomeComponent'
-import SongPlaylist from '~/components/SongPlaylist'
+import SongPlaylist from "~/components/SongPlaylist";
+import Shortcuts from "~/components//Shortcuts";
+import TopBar from "~/components//TopBar";
 export default {
   data() {
     return {
       playlistID: this.$nuxt._route.params.id,
       playlistTracks: [],
-      playlistName: '',
-      playlistDescription: '',
-      playlistThumbnail: '',
+      playlistName: "",
+      playlistDescription: "",
+      playlistThumbnail: "",
       isLoading: true,
-    }
+      primaryColor: ""
+    };
   },
   components: {
-    HomeComponent,
-    SongPlaylist
+    SongPlaylist,
+    Shortcuts,
+    TopBar
   },
   mounted() {
-    axios.get('/api/token').then(res => {
-      spotify.setAccessToken(res.data);
-
-      spotify.getPlaylist(this.playlistID, {}, (error, response) => {
-        this.playlistTracks = response.tracks.items;
-        this.isLoading = false;
-        this.playlistName = response.name;
-        this.playlistDescription = response.description;
-        this.playlistThumbnail = response.images[0].url;
-        console.log(response)
-      })
-    })
+    axios.get("http://localhost:9000/getAccessToken").then(res => {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${res.data}`
+        }
+      };
+      axios
+        .get(`https://api.spotify.com/v1/playlists/${this.playlistID}`, config)
+        .then(res => {
+          this.playlistTracks = res.data.tracks.items;
+          this.isLoading = false;
+          this.playlistName = res.data.name;
+          this.playlistDescription = res.data.description;
+          this.playlistThumbnail = res.data.images[0].url;
+          this.primaryColor = res.data.primary_color;
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    });
   }
-
-}
+};
 </script>
 <style>
 .playlistImg img {
   border-radius: 6px;
 }
+.playlistText p {
+  padding: 0;
+  color: var(--text-color);
+}
 .spacer {
   padding: 20px 0px;
+}
+.playlistInfo {
+  border-radius: 6px;
+  padding: 10px 0;
 }
 </style>

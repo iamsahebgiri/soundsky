@@ -17,15 +17,16 @@
 </template>
 
 <script>
-import * as SpotifyWebApi from "spotify-web-api-js";
 import axios from "axios";
-let spotify = new SpotifyWebApi();
 export default {
   props: ["item"],
   methods: {
     playHandler() {
       this.$store.commit("setCurrentSong", this.item.track);
       // console.log(this.item.track);
+    },
+    downloadHandler() {
+      console.log("Song in Plalist is clicked to download...")
     }
   }
 };

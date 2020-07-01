@@ -1,6 +1,9 @@
 <template>
   <div>
-    <HomeComponent />
+    <div class="topbox light pb-3 pt-3">
+      <TopBar />
+      <Shortcuts></Shortcuts>
+    </div>
     <div v-if="isLoading" class="d-flex justify-content-center">
       <div class="spinner-border text-primary" role="status">
         <span class="sr-only">Loading...</span>
@@ -9,17 +12,17 @@
     <div class="content d-flex flex-wrap">
       <Album v-for="item in categoryPlaylist" :key="item.id" v-bind:item="item" />
     </div>
+    <div class="spacer end"></div>
   </div>
 </template>
 <script>
-import * as SpotifyWebApi from 'spotify-web-api-js';
-import axios from 'axios';
+import axios from "axios";
 
-let spotify = new SpotifyWebApi();
-
-import HomeComponent from '~/components/HomeComponent'
-import SongPlaylist from '~/components/SongPlaylist'
-import Album from '~/components/Album'
+import HomeComponent from "~/components/HomeComponent";
+import SongPlaylist from "~/components/SongPlaylist";
+import Album from "~/components/Album";
+import Shortcuts from "~/components//Shortcuts";
+import TopBar from "~/components//TopBar";
 
 export default {
   data() {
@@ -27,24 +30,35 @@ export default {
       categoryId: this.$nuxt._route.params.id,
       isLoading: true,
       categoryPlaylist: []
-    }
+    };
   },
   components: {
-    HomeComponent,
+    Shortcuts,
+    TopBar,
     SongPlaylist,
     Album
   },
   mounted() {
-    axios.get('/api/token').then(res => {
-      spotify.setAccessToken(res.data);
-
-      spotify.getCategoryPlaylists(this.categoryId, {}, (error, response) => {
-        
-        this.categoryPlaylist = response.playlists.items;
-        console.log(response.playlists.items)
-        this.isLoading= false;
-      })
-    })
+    axios.get("http://localhost:9000/getAccessToken").then(res => {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${res.data}`
+        }
+      };
+      axios
+        .get(
+          `https://api.spotify.com/v1/browse/categories/${this.categoryId}/playlists?country=IN`,
+          config
+        )
+        .then(res => {
+          this.categoryPlaylist = res.data.playlists.items;
+          this.isLoading = false;
+          console.log(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    });
   }
-}
+};
 </script>
