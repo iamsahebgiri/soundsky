@@ -1,32 +1,53 @@
 <template>
   <div class="col-2 pr-0 pl-0 left-panel position-fixed">
-    <img src="~/assets/meetwits.svg" alt="Meetwits" class="logo mt-3 ml-1" />
+    <img src="~/assets/meetwits.svg" alt="Meetwits" class="logo" />
     <div class="menu">
+      <p class="nav-group-title">Library</p>
       <ul class="my-nav">
         <nuxt-link to="/" class="my-nav-item" exact>
           <li>
-            <i class="material-icons md-24">home</i>Home
+            <span class="iconify" data-icon="ion:home-outline" data-inline="true"></span>Home
           </li>
         </nuxt-link>
-       <nuxt-link to="/artist" class="my-nav-item ">
+        <nuxt-link to="/artist" class="my-nav-item">
           <li>
-            <i class="material-icons">supervised_user_circle</i>Artists
+            <span class="iconify" data-icon="ion:people-outline" data-inline="false"></span>Artists
           </li>
-       </nuxt-link>
-        <nuxt-link to="/category" class="my-nav-item ">
+        </nuxt-link>
+        <nuxt-link to="/category" class="my-nav-item">
           <li>
-            <i class="material-icons">category</i>Category
+            <span class="iconify" data-icon="ion:musical-notes-outline" data-inline="false"></span>Category
           </li>
         </nuxt-link>
         <nuxt-link to="/playlist/37i9dQZEVXbMDoHDwVN2tF" class="my-nav-item">
           <li>
-            <i class="material-icons">whatshot</i>Trendings
+            <span class="iconify" data-icon="ion:flash-outline" data-inline="false"></span>Trendings
           </li>
         </nuxt-link>
 
         <a href="#" class="my-nav-item">
           <li>
-            <i class="material-icons">favorite</i>Favourites
+            <span class="iconify" data-icon="ion:heart-outline" data-inline="false"></span>Liked Song
+          </li>
+        </a>
+      </ul>
+    </div>
+    <div class="menu">
+      <p class="nav-group-title">Playlists</p>
+      <ul class="my-nav">
+        <!-- <a href="#" class="my-nav-item">
+          <li>
+            <span class="iconify" data-icon="ion:create-outline" data-inline="false"></span>Create
+          </li>
+        </a> -->
+        <a href="#" class="my-nav-item">
+          <li>
+            <span class="iconify" data-icon="ion:folder-outline" data-inline="false"></span>Lo Fi
+          </li>
+        </a>
+        <a href="#" class="my-nav-item">
+          <li>
+            <span class="iconify" data-icon="ion:folder-outline" data-inline="false"></span>Pop
           </li>
         </a>
       </ul>
@@ -36,23 +57,27 @@
 
 <style>
 .left-panel {
-  background: var(--bg);
+  background: var(--sidebar-gray-6);
 }
 .left-panel {
   height: 100%;
 }
 .logo {
-  height: 30px;
+  height: 35px;
+  margin:20px 10px;
 }
 
 .my-nav {
   list-style-type: none;
   padding: 0;
-  margin-top: 30px;
 }
 
 .my-nav li {
-  padding: 6px 0;
+  height: 32px;
+  margin: 0 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
 }
 
 .my-nav a {
@@ -61,17 +86,21 @@
 }
 
 .my-nav li:hover {
-  background: var(--light-gray);
+  background: var(--navigation-gray-4);
 }
-.my-nav-item i {
-  margin-left: 15px;
-  margin-right: 15px;
-  vertical-align: middle;
+.my-nav .iconify {
+  font-size: 18px;
+  margin-left: 12px;
+  margin-right: 6px;
+  color: var(--brand-color);
 }
-
-.my-nav .nuxt-link-active li {
-  color: var(--dodger-blue);
+.nav-group-title {
+  font-size: 13px;
+  color: #6b778c !important;
+  margin: 3px 13px;
   font-weight: 500;
-  border-left: 4px solid;
+}
+.my-nav .nuxt-link-active li {
+  background: var(--navigation-gray-4);
 }
 </style>

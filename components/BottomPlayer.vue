@@ -57,7 +57,8 @@ export default {
   padding: 6px;
 }
 .bottom-bar.light {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(51,51,51,0.2);
+  backdrop-filter: saturate(180%) blur(20px);
 }
 .bottom-bar.dark {
   background: rgba(66, 66, 66, 0.7);

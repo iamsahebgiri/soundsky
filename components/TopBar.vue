@@ -27,7 +27,7 @@
     <div class="actionbar d-flex align-items-center">
       <div class="dark-mode">
         <button type="button" class="action-btn" @click="toggleDarkMode()">
-          <i class="material-icons" style=" transform: rotate(150deg);">brightness_2</i>
+          <span class="iconify" data-icon="ion:sunny-outline" data-inline="false"></span>
         </button>
       </div>
       <div class="settings">
@@ -38,7 +38,7 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          <i class="material-icons">apps</i>
+        <span class="iconify" data-icon="ion:settings-outline" data-inline="false"></span>
         </button>
         <div class="dropdown-menu dropdown-menu-right">
           <button class="dropdown-item" data-toggle="modal" data-target="#shortcutModal">Shortcuts</button>
@@ -85,9 +85,9 @@ export default {
 .searchbar {
   height: 36px;
   width: 360px;
-  background-color: var(--light-gray);
+  background-color: var(--navigation-gray-4);
   padding: 0 10px;
-  border-radius: 25px;
+  border-radius: 6px;
 }
 .searchbar .feather-search {
   height: 18px;
@@ -106,7 +106,7 @@ export default {
   padding: 6px;
   border-radius: 6px;
 }
-.actionbar i {
+.actionbar .iconify {
   color: var(--icons-color);
 }
 .actionbar .action-btn {

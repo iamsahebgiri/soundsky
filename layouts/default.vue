@@ -23,12 +23,13 @@ export default {
 <style>
 html,
 body {
-  font-family: -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+  font-family: -apple-system, "SF Pro Display", Oxygen, Ubuntu, Cantarell, "Open Sans",
     "Helvetica Neue", sans-serif;
 }
 :root {
   --dodger-blue: #1377ff;
   --radical-red: #f62459;
+  --brand-color: #1377ff;
 }
 .container-fluid.light {
   --bg: #ffffff;
@@ -36,13 +37,17 @@ body {
   --grey-text: #848484;
   --text-color: #000000;
   --icons-color: #000000;
+  --navigation-gray-4: rgb(209,209,214);
+  --sidebar-gray-6: #F2F2F7;
 }
 
 .container-fluid.dark {
-  --bg: #303030;
+  --bg: #000;
   --light-gray: #424242;
   --text-color: #ffffff;
   --icons-color: #ffffff;
+  --navigation-gray-4: rgb(58,58,60);
+  --sidebar-gray-6: #1C1C1E;
 }
 
 p,
@@ -65,7 +70,7 @@ span {
   background: rgba(255, 255, 255, 0.7);
 }
 .bottom-bar.dark {
-  background: rgba(66, 66, 66, 0.7);
+  background: rgba(28, 28, 28, 0.7);
 }
 a{
   text-decoration: none;

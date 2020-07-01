@@ -29,6 +29,9 @@ export default {
         src:
           "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js",
         type: "text/javascript"
+      },
+      {
+        src: "https://code.iconify.design/1/1.0.7/iconify.min.js",
       }
     ]
   },
