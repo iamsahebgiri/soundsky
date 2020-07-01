@@ -1,9 +1,13 @@
 export const state = () => ({
-    currentSong: ''
+    currentSong: '',
+    songs: []
 })
 
 export const mutations = {
     setCurrentSong(state, param) {
         state.currentSong = param;
+    },
+    setSongs(state,param) {
+        state.songs.push(param)
     }
 }

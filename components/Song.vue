@@ -2,11 +2,14 @@
   <div class="song">
     <div class="song-container">
       <div class="bg"></div>
-    
-        <img v-bind:src="item.images[1].url" class="item-image" />
-
+      <img v-bind:src="item.images[1].url" class="item-image" />
       <div class="overlay">
-        <button class="playBtn" @click="playHandler">Play</button>
+        <button class="playBtn btn" @click="playHandler">
+          <span class="iconify" data-icon="ion:play" data-inline="false"></span>
+        </button>
+        <button class="downBtn btn" @click="downloadHandler">
+          <span class="iconify" data-icon="ion:download-outline" data-inline="false"></span>
+        </button>
       </div>
     </div>
     <div class="song-name text-truncate">{{ item.name }}</div>
@@ -14,25 +17,28 @@
 </template>
 
 <script>
-import * as SpotifyWebApi from 'spotify-web-api-js';
-import axios from 'axios';
+import * as SpotifyWebApi from "spotify-web-api-js";
+import axios from "axios";
 let spotify = new SpotifyWebApi();
 export default {
-  props: ['item'],
+  props: ["item"],
   methods: {
     playHandler() {
-      axios.get('/api/token').then(res => {
+      axios.get("/api/token").then(res => {
         spotify.setAccessToken(res.data);
         spotify.getAlbumTracks(this.item.id, {}, (error, response) => {
-          this.$store.commit('setCurrentSong', response.items[0]);
-        })
-      })
+          this.$store.commit("setCurrentSong", response.items[0]);
+        });
+      });
+    },
+    downloadHandler() {
+      console.log("download clicked....")
     }
   }
-}
+};
 </script>
 
-<style>
+<style scoped>
 .song {
   width: 190px;
   margin: 20px 10px;
@@ -45,10 +51,17 @@ export default {
 .downBtn {
   background-color: rgba(255, 255, 255, 0.4);
   border: none;
-  border-radius: 3px;
-  padding: 5px 12px;
+  height: 36px;
+  width: 36px;
+  border-radius: 18px;
   color: white;
   cursor: pointer;
+}
+.playBtn {
+  padding: 0 0 0 3px;
+}
+.downBtn {
+    padding: 0 0 3px 0;
 }
 .song-container {
   position: relative;

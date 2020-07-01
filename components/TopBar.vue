@@ -1,5 +1,5 @@
 <template>
-  <div class="col-12 single-line sticky-top d-flex justify-content-between">
+  <div class="col-12 single-line d-flex justify-content-between">
     <div class="searchbar d-flex align-items-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -152,8 +152,5 @@ export default {
   border-bottom: 6px solid #ffffff;
   border-left: 6px solid transparent;
   content: "";
-}
-.single-line {
-  vertical-align: middle;
 }
 </style>

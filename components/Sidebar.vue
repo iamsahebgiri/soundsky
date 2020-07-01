@@ -34,20 +34,20 @@
     </div>
     <div class="menu">
       <p class="nav-group-title">Playlists</p>
-      <ul class="my-nav">
-        <!-- <a href="#" class="my-nav-item">
-          <li>
-            <span class="iconify" data-icon="ion:create-outline" data-inline="false"></span>Create
-          </li>
-        </a> -->
+      <ul class="my-nav playlists">
         <a href="#" class="my-nav-item">
           <li>
-            <span class="iconify" data-icon="ion:folder-outline" data-inline="false"></span>Lo Fi
+            <span class="iconify" data-icon="ion:folder-outline" data-inline="false"></span>Top 50
           </li>
         </a>
         <a href="#" class="my-nav-item">
           <li>
-            <span class="iconify" data-icon="ion:folder-outline" data-inline="false"></span>Pop
+            <span class="iconify" data-icon="ion:folder-outline" data-inline="false"></span>Viral Hits
+          </li>
+        </a>
+        <a href="#" class="my-nav-item">
+          <li>
+            <span class="iconify" data-icon="ion:folder-outline" data-inline="false"></span>Bollywood
           </li>
         </a>
       </ul>
@@ -102,5 +102,8 @@
 }
 .my-nav .nuxt-link-active li {
   background: var(--navigation-gray-4);
+}
+.playlists a li .iconify {
+  color: var(--gray-1);
 }
 </style>

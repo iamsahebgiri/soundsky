@@ -39,6 +39,7 @@ body {
   --icons-color: #000000;
   --navigation-gray-4: rgb(209,209,214);
   --sidebar-gray-6: #F2F2F7;
+  --gray-1: #8E8E93;
 }
 
 .container-fluid.dark {
@@ -48,6 +49,7 @@ body {
   --icons-color: #ffffff;
   --navigation-gray-4: rgb(58,58,60);
   --sidebar-gray-6: #1C1C1E;
+  --gray-1: #8E8E93;
 }
 
 p,

@@ -59,9 +59,12 @@ export default {
 .bottom-bar.light {
   background: rgba(51,51,51,0.2);
   backdrop-filter: saturate(180%) blur(20px);
+  border-top: 1px solid rgba(65,67,78,0.16);
 }
 .bottom-bar.dark {
   background: rgba(66, 66, 66, 0.7);
+  border-top: 1px solid rgba(65,67,78,0.16);
+  backdrop-filter: saturate(180%) blur(20px);
 }
 .song-info {
   width: 200px;
