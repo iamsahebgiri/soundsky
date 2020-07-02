@@ -1,17 +1,11 @@
 <template>
   <div class="bottom-bar light">
-    <div class="song-info-container">
-      <song-info :title="title" :artist="artist" :thumb="thumb" />
-    </div>
-    <div class="music-player">
-      <player :src="playing" />
-    </div>
+      <player :src="playing" :title="title" :artist="artist" :thumb="thumb" />
   </div>
 </template>
 <script>
-
 import Player from "./Player.vue";
-import SongInfo from "./SongInfo.vue";
+// import SongInfo from "./SongInfo.vue";
 export default {
   data() {
     return {
@@ -24,7 +18,6 @@ export default {
   },
   components: {
     Player,
-    SongInfo
   },
   mounted() {
     this.$store.watch(
@@ -35,9 +28,11 @@ export default {
         if (this.$store.state.currentSong.preview_url !== null) {
           this.playing = this.$store.state.currentSong.preview_url;
         }
-        // if (this.$store.state.currentSong.album.images[2].url !== null) {
-        //   this.thumb = this.$store.state.currentSong.album.images[2].url;
-        // }
+        if (this.$store.state.currentSong.album !== undefined) {
+          if (this.$store.state.currentSong.album.images[2].url !== null) {
+            this.thumb = this.$store.state.currentSong.album.images[2].url;
+          }
+        }
 
         // console.log(this.$store.state.currentSong);
       }
@@ -67,11 +62,5 @@ export default {
   background: rgba(66, 66, 66, 0.7);
   border-top: 1px solid rgba(65, 67, 78, 0.16);
   backdrop-filter: saturate(180%) blur(20px);
-}
-.song-info-container {
-  margin-right: 10px;
-}
-.music-player {
-  width: 100%;
 }
 </style>

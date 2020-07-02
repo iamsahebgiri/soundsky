@@ -1,6 +1,6 @@
 <script>
 export default {
-  props: ["src"],
+  props: ["src", "artist", "title", "thumb"],
   data() {
     return {
       playing: "",
@@ -41,22 +41,36 @@ export default {
  
 <template>
   <div class="player">
-    <audio
-      @timeupdate="timeupdate"
-      ref="music"
-      preload="auto"
-      @playing="playingMethod"
-      :src="src"
-      autoplay="true"
-    ></audio>
-
-    <div class="play btn btn-primary" @click="playAudio">{{ isPlaying ? "Pause" : "Play"}}</div>
-    <div class="currentTime">0:{{Math.floor(currentTime/10) == 0 ?`0${currentTime}`: currentTime}}</div>
-    <div class="music-progress">
-      <div class="music-progress-bar" :style="{ width: playhead + '%' }"></div>
+    <div class="song-info">
+      <div class="thumb">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <!-- <img :src="thumb" height="40" width="40" /> -->
+      </div>
+      <div class="current-song">
+        <div class="title text-truncate">{{title}}</div>
+        <div class="artist">{{artist}}</div>
+      </div>
     </div>
-    <div class="duration">0:30</div>
-    <div class="net-state">:{{state}}</div>
+    <div class="music-player">
+      <audio
+        @timeupdate="timeupdate"
+        ref="music"
+        preload="auto"
+        @playing="playingMethod"
+        :src="src"
+        autoplay="true"
+      ></audio>
+
+      <div class="play btn btn-primary" @click="playAudio">{{ isPlaying ? "Pause" : "Play"}}</div>
+      <div class="currentTime">0:{{Math.floor(currentTime/10) == 0 ?`0${currentTime}`: currentTime}}</div>
+      <div class="music-progress">
+        <div class="music-progress-bar" :style="{ width: playhead + '%' }"></div>
+      </div>
+      <div class="duration">0:30</div>
+      <div class="net-state">:{{state}}</div>
+    </div>
   </div>
 </template>
 
@@ -64,6 +78,7 @@ export default {
 .player {
   display: flex;
   align-items: center;
+  width: 100%;
 }
 .music-progress {
   background: var(--light-gray);
@@ -95,5 +110,31 @@ export default {
 }
 .duration {
   margin-left: 10px;
+}
+.song-info {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+.music-player {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.thumb {
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+.thumb img {
+  border-radius: 6px;
+}
+.title {
+  width: 160px;
+}
+.artist {
+  font-size: 11px;
 }
 </style>
