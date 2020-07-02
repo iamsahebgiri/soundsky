@@ -1,12 +1,12 @@
 {
-  "name": "musix",
+  "name": "soundsky",
   "version": "1.0.0",
   "description": "My doozie Nuxt.js project",
   "author": "iamsahebgiri",
   "private": true,
   "scripts": {
     "dev": "nuxt -s",
-    "build": "nuxt build",
+    "build": "nuxt build -s",
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lambda-serve": "netlify-lambda serve functions",
