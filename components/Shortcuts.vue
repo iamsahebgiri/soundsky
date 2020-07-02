@@ -7,65 +7,23 @@
     aria-labelledby="shortcutModalLabel"
     aria-hidden="true"
   >
-    <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-dialog modal-md" role="document">
       <div class="modal-content">
         <div class="modal-body">
-          <h4>Shortcuts</h4>
+          <h4>About SoundSky</h4>
           <br>
-          <p>The player will bind the following keyboard shortcuts when it is focused.</p>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Key</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <code>space</code>
-                </td>
-                <td>Toggle playback</td>
-              </tr>
-              <tr>
-                <td>
-                  <code>K</code>
-                </td>
-                <td>Toggle playback</td>
-              </tr>
-              <tr>
-                <td>←</td>
-                <td>
-                  Seek backward by the
-                  <code>seekTime</code> option
-                </td>
-              </tr>
-              <tr>
-                <td>→</td>
-                <td>
-                  Seek forward by the
-                  <code>seekTime</code> option
-                </td>
-              </tr>
-              <tr>
-                <td>↑</td>
-                <td>Increase volume</td>
-              </tr>
-              <tr>
-                <td>↓</td>
-                <td>Decrease volume</td>
-              </tr>
-              <tr>
-                <td>
-                  <code>M</code>
-                </td>
-                <td>Toggle mute</td>
-              </tr>
-            </tbody>
-          </table>
+          <p>
+            The only motivation behind soundsky is to have better knowledge of how api works in general and how big companies like Spotify use them on their front end. This project taught me oauth and most of the security stuff. SoundSky is built on top of Nuxt.js, a framework of vue.js.
+          </p>
+          <p>
+            You can download song as ringtone or play 30 seconds track for fun and relax.
+          </p>
+          <p>
+            Do check me out on <a href="http://iamsahebgiri.now.sh" target="_blank">iamsahebgiri.now.sh</a>.
+          </p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn-close" data-dismiss="modal">Dismiss</button>
+          <button type="button" class="btn-close" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>

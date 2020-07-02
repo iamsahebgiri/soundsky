@@ -4,7 +4,7 @@
       <TopBar />
       <Shortcuts></Shortcuts>
     </div>
-    <div class="playlistInfo text-center" :style="{background:primaryColor}">
+    <div class="playlistInfo text-center" >
       <div class="playlistImg">
         <img v-if="!isLoading" v-bind:src="playlistThumbnail" height="200px" width="200px" />
       </div>

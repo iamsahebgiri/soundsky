@@ -17,11 +17,13 @@
         <line x1="21" y1="21" x2="16.65" y2="16.65" />
       </svg>
       <input
+        v-model="searchTerm"
+        v-on:keyup="submitSearch"
         type="text"
         name="query"
         class="query"
         id="query"
-        placeholder="Search music, artists, albums..."
+        placeholder="Search tracks..."
       />
     </div>
     <div class="actionbar d-flex align-items-center">
@@ -38,12 +40,14 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-        <span class="iconify" data-icon="ion:settings-outline" data-inline="false"></span>
+          <span class="iconify" data-icon="ion:settings-outline" data-inline="false"></span>
         </button>
         <div class="dropdown-menu dropdown-menu-right">
-          <button class="dropdown-item" data-toggle="modal" data-target="#shortcutModal">Shortcuts</button>
-          <a class="dropdown-item" href="#">App Store</a>
-          <a class="dropdown-item" href="#">About</a>
+          <button class="dropdown-item" data-toggle="modal" data-target="#shortcutModal">Soundsky</button>
+          <a class="dropdown-item" href="https://github.com/iamsahebgiri" target="_blank">Github</a>
+          <a class="dropdown-item" href="https://instagram.com/iamsahebgiri" target="_blank">Instagram</a>
+          <a class="dropdown-item" href="https://facebook.com/iamsahebgiri" target="_blank">Facebook</a>
+          <a class="dropdown-item" href="https://iamsahebgiri.now.sh" target="_blank">About</a>
         </div>
       </div>
     </div>
@@ -56,11 +60,22 @@ let trans = () => {
   document.documentElement.classList.add("transition");
   window.setTimeout(() => {
     document.documentElement.classList.remove("transition");
-  }, 1000);
+  }, 500);
 };
 export default {
+  data() {
+    return {
+      searchTerm: ""
+    };
+  },
   methods: {
-    toggleDarkMode: function () {
+    submitSearch: function(e) {
+      if (e.keyCode === 13) {
+        const term = this.searchTerm;
+        this.$router.push({ path: `/search/${term}` });
+      }
+    },
+    toggleDarkMode: function() {
       if ($(".container-fluid").hasClass("dark")) {
         trans();
         $(".container-fluid").removeClass("dark");
@@ -78,14 +93,14 @@ export default {
       }
     }
   }
-}
+};
 </script>
 
 <style>
 .searchbar {
   height: 36px;
   width: 360px;
-  background-color: var(--navigation-gray-4);
+  background-color: var(--sidebar-gray-6);
   padding: 0 10px;
   border-radius: 6px;
 }
@@ -110,8 +125,8 @@ export default {
   color: var(--icons-color);
 }
 .actionbar .action-btn {
-  height:32px;
-  width:32px;
+  height: 32px;
+  width: 32px;
   border: none;
   text-align: center;
   text-decoration: none;

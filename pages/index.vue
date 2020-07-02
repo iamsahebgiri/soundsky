@@ -117,6 +117,6 @@ export default {
   margin-left: 10px;
 }
 .content {
-  margin-bottom: 85px;
+  padding-bottom: 85px;
 }
 </style>

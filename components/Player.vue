@@ -43,10 +43,10 @@ export default {
   <div class="player">
     <div class="song-info">
       <div class="thumb">
-        <div class="spinner-border text-primary" role="status">
+        <div v-if="state==3" class="spinner-border text-primary" role="status">
           <span class="sr-only">Loading...</span>
         </div>
-        <!-- <img :src="thumb" height="40" width="40" /> -->
+        <img v-else :src="thumb" height="40" width="40" />
       </div>
       <div class="current-song">
         <div class="title text-truncate">{{title}}</div>
@@ -61,6 +61,7 @@ export default {
         @playing="playingMethod"
         :src="src"
         autoplay="true"
+        loop="true"
       ></audio>
 
       <div class="play btn btn-primary" @click="playAudio">{{ isPlaying ? "Pause" : "Play"}}</div>
@@ -69,7 +70,6 @@ export default {
         <div class="music-progress-bar" :style="{ width: playhead + '%' }"></div>
       </div>
       <div class="duration">0:30</div>
-      <div class="net-state">:{{state}}</div>
     </div>
   </div>
 </template>
@@ -106,12 +106,15 @@ export default {
   padding: 2px 7px;
 }
 .currentTime {
+  color: var(--text-color);
   margin-right: 10px;
 }
 .duration {
+  color: var(--text-color);
   margin-left: 10px;
 }
 .song-info {
+  color: var(--text-color);
   display: flex;
   align-items: center;
   margin-right: 10px;

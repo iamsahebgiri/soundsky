@@ -1,6 +1,8 @@
 <template>
   <div class="col-2 pr-0 pl-0 left-panel position-fixed">
-    <img src="~/assets/meetwits.svg" alt="Meetwits" class="logo" />
+    <nuxt-link to="/">
+      <img src="~/assets/meetwits.svg" alt="Meetwits" class="logo" />
+    </nuxt-link>
     <div class="menu">
       <p class="nav-group-title">Library</p>
       <ul class="my-nav">
@@ -9,25 +11,39 @@
             <span class="iconify" data-icon="ion:home-outline" data-inline="true"></span>Home
           </li>
         </nuxt-link>
+        <nuxt-link to="/category/toplists" class="my-nav-item">
+          <li>
+            <span class="iconify" data-icon="ion:flash-outline" data-inline="false"></span>Top
+          </li>
+        </nuxt-link>
+        <nuxt-link to="/category/gaming" class="my-nav-item">
+          <li>
+            <span class="iconify" data-icon="ion:game-controller-outline" data-inline="false"></span>Gaming
+          </li>
+        </nuxt-link>
+        <nuxt-link to="/category/focus" class="my-nav-item">
+          <li>
+            <span class="iconify" data-icon="ion:fitness-outline" data-inline="false"></span>Focus
+          </li>
+        </nuxt-link>
+        <nuxt-link to="/category/chill" class="my-nav-item">
+          <li>
+            <span class="iconify" data-icon="ion:ice-cream-outline" data-inline="false"></span>Chill
+          </li>
+        </nuxt-link>
         <nuxt-link to="/category/mood" class="my-nav-item">
           <li>
-            <span class="iconify" data-icon="ion:musical-notes-outline" data-inline="false"></span>Mood
+            <span class="iconify" data-icon="ion:headset-outline" data-inline="false"></span>Mood
           </li>
         </nuxt-link>
-        <nuxt-link to="/playlist/37i9dQZEVXbLRQDuF5jeBp" class="my-nav-item">
-          <li>
-            <span class="iconify" data-icon="ion:flash-outline" data-inline="false"></span>Trendings
-          </li>
-        </nuxt-link>
-
       </ul>
     </div>
     <div class="menu">
       <p class="nav-group-title">Playlists</p>
       <ul class="my-nav playlists">
-        <nuxt-link to="/playlist/37i9dQZEVXbMDoHDwVN2tF" class="my-nav-item">
+        <nuxt-link to="/category/classical" class="my-nav-item">
           <li>
-            <span class="iconify" data-icon="ion:folder-outline" data-inline="false"></span>Top 50
+            <span class="iconify" data-icon="ion:folder-outline" data-inline="false"></span>Classical
           </li>
         </nuxt-link>
         <nuxt-link to="/category/bollywood" class="my-nav-item">
@@ -59,7 +75,7 @@
 }
 .logo {
   height: 35px;
-  margin: 20px 10px;
+  margin: 20px 22px;
 }
 
 .my-nav {

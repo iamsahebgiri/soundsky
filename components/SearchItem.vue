@@ -2,17 +2,17 @@
   <div class="song">
     <div class="song-container">
       <div class="bg"></div>
-      <img v-bind:src="item.track.album.images[1].url" class="item-image" />
+      <img v-bind:src="item.album.images[1].url" class="item-image" />
       <div class="overlay">
         <button class="playBtn btn" @click="playHandler">
           <span class="iconify" data-icon="ion:play" data-inline="false"></span>
         </button>
-        <a class="downBtn btn" :href="item.track.preview_url" target="_blank" :download="item.track.name">
+        <a class="downBtn btn" :href="item.preview_url" target="_blank" :download="item.name">
           <span class="iconify" data-icon="ion:download-outline" data-inline="false"></span>
         </a>
       </div>
     </div>
-    <div class="song-name text-truncate">{{ item.track.name }}</div>
+    <div class="song-name text-truncate">{{ item.name }}</div>
   </div>
 </template>
 
@@ -22,8 +22,8 @@ export default {
   props: ["item"],
   methods: {
     playHandler() {
-      this.$store.commit("setCurrentSong", this.item.track);
-      console.log(this.item.track);
+      this.$store.commit("setCurrentSong", this.item);
+      console.log(this.item);
     }
   }
 };
