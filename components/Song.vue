@@ -27,7 +27,7 @@ export default {
       if (Cookies.get("token") === undefined) {
         const now = new Date();
         now.setTime(now.getTime() + 1 * 3600 * 1000);
-        axios.get("http://localhost:9000/getAccessToken").then(res => {
+        axios.get("https://soundsky.netlify.app/.netlify/functions/getAccessToken").then(res => {
           Cookies.set("token", res.data, { expires: now });
         });
       } else {
