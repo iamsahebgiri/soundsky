@@ -7,9 +7,9 @@
         <button class="playBtn btn" @click="playHandler">
           <span class="iconify" data-icon="ion:play" data-inline="false"></span>
         </button>
-        <button class="downBtn btn" @click="downloadHandler">
+        <a class="downBtn btn" :href="item.track.preview_url" :download="item.track.name">
           <span class="iconify" data-icon="ion:download-outline" data-inline="false"></span>
-        </button>
+        </a>
       </div>
     </div>
     <div class="song-name text-truncate">{{ item.track.name }}</div>
@@ -17,16 +17,13 @@
 </template>
 
 <script>
-import axios from "axios";
+
 export default {
   props: ["item"],
   methods: {
     playHandler() {
       this.$store.commit("setCurrentSong", this.item.track);
-      // console.log(this.item.track);
-    },
-    downloadHandler() {
-      console.log("Song in Plalist is clicked to download...")
+      console.log(this.item.track);
     }
   }
 };

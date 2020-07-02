@@ -17,22 +17,38 @@
 </template>
 
 <script>
-import * as SpotifyWebApi from "spotify-web-api-js";
+import Cookies from "js-cookie";
 import axios from "axios";
-let spotify = new SpotifyWebApi();
+
 export default {
   props: ["item"],
   methods: {
     playHandler() {
-      axios.get("/api/token").then(res => {
-        spotify.setAccessToken(res.data);
-        spotify.getAlbumTracks(this.item.id, {}, (error, response) => {
-          this.$store.commit("setCurrentSong", response.items[0]);
+      if (Cookies.get("token") === undefined) {
+        const now = new Date();
+        now.setTime(now.getTime() + 1 * 3600 * 1000);
+        axios.get("http://localhost:9000/getAccessToken").then(res => {
+          Cookies.set("token", res.data, { expires: now });
         });
-      });
+      } else {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("token")}`
+          }
+        };
+        axios
+          .get(
+            `https://api.spotify.com/v1/albums/${this.item.id}/tracks`,
+            config
+          )
+          .then(res => {
+            this.$store.commit("setCurrentSong", res.data.items[0]);
+            console.log(res.data)
+          });
+      }
     },
     downloadHandler() {
-      console.log("download clicked....")
+      console.log("download clicked....");
     }
   }
 };
@@ -61,7 +77,7 @@ export default {
   padding: 0 0 0 3px;
 }
 .downBtn {
-    padding: 0 0 3px 0;
+  padding: 0 0 3px 0;
 }
 .song-container {
   position: relative;

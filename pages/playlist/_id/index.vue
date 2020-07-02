@@ -10,7 +10,7 @@
       </div>
       <br />
       <div class="playlistText">
-        <h3>{{ playlistName }}</h3>
+        <h3 class="heading">{{ playlistName }}</h3>
         <p>{{ playlistDescription }}</p>
         <br />
       </div>
@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import Cookies from "js-cookie";
 import axios from "axios";
 
 import SongPlaylist from "~/components/SongPlaylist";
@@ -54,10 +55,16 @@ export default {
     TopBar
   },
   mounted() {
-    axios.get("http://localhost:9000/getAccessToken").then(res => {
+    if (Cookies.get("token") === undefined) {
+      const now = new Date();
+      now.setTime(now.getTime() + 1 * 3600 * 1000);
+      axios.get("http://localhost:9000/getAccessToken").then(res => {
+        Cookies.set("token", res.data, { expires: now });
+      });
+    } else {
       const config = {
         headers: {
-          Authorization: `Bearer ${res.data}`
+          Authorization: `Bearer ${Cookies.get("token")}`
         }
       };
       axios
@@ -74,12 +81,13 @@ export default {
         .catch(err => {
           console.log(err);
         });
-    });
+    }
   }
 };
 </script>
 <style>
 .playlistImg img {
+  margin-top: 10px;
   border-radius: 6px;
 }
 .playlistText p {

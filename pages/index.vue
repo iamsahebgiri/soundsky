@@ -1,17 +1,8 @@
 <template>
   <div>
     <HomeComponent />
-    <h3>Featured</h3>
-    <div v-if="loadingNew" class="d-flex justify-content-center">
-      <div class="spinner-border text-primary" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-    </div>
-    <div class="content d-flex flex-wrap">
-      <Song v-for="item in newReleases" :key="item.id" v-bind:item="item" />
-    </div>
-    <div class="spacer"></div>
-    <h3>Editor's Picks</h3>
+
+    <h3 class="heading">Editor's Picks</h3>
     <div v-if="loadingEditor" class="d-flex justify-content-center">
       <div class="spinner-border text-primary" role="status">
         <span class="sr-only">Loading...</span>
@@ -20,8 +11,8 @@
     <div class="content d-flex flex-wrap">
       <Album v-for="item in featuredPlaylists" :key="item.id" v-bind:item="item" />
     </div>
-    <div class="spacer"></div>
-    <h3>Categories</h3>
+    <!-- <div class="spacer"></div> -->
+    <h3 class="heading">Categories</h3>
     <div v-if="loadingCat" class="d-flex justify-content-center">
       <div class="spinner-border text-primary" role="status">
         <span class="sr-only">Loading...</span>
@@ -30,11 +21,24 @@
     <div class="content d-flex flex-wrap">
       <Category v-for="item in categories" :key="item.id" v-bind:item="item" />
     </div>
-    <div class="spacer end"></div>
+
+    <h3 class="heading">Featured</h3>
+    <div v-if="loadingNew" class="d-flex justify-content-center">
+      <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <div class="content d-flex flex-wrap">
+      <Song v-for="item in newReleases" :key="item.id" v-bind:item="item" />
+    </div>
+    <!-- <div class="spacer"></div> -->
+
+    <!-- <div class="spacer end"></div> -->
   </div>
 </template>
 <script>
 import axios from "axios";
+import Cookies from "js-cookie";
 
 import HomeComponent from "~/components/HomeComponent";
 import Song from "~/components/Song";
@@ -61,10 +65,16 @@ export default {
   },
   mounted() {
     console.log("Index mounted...");
-    axios.get("http://localhost:9000/getAccessToken").then(res => {
+    if (Cookies.get("token") === undefined) {
+      const now = new Date();
+      now.setTime(now.getTime() + 1 * 3600 * 1000);
+      axios.get("http://localhost:9000/getAccessToken").then(res => {
+        Cookies.set("token", res.data, { expires: now });
+      });
+    } else {
       const config = {
         headers: {
-          Authorization: `Bearer ${res.data}`
+          Authorization: `Bearer ${Cookies.get("token")}`
         }
       };
       axios
@@ -90,24 +100,23 @@ export default {
             this.loadingCat = false;
             this.loadingNew = false;
             this.loadingEditor = false;
-            console.log(categories, featured, newReleases);
+            // console.log(categories, featured, newReleases);
           })
         )
         .catch(err => {
           console.log(err);
         });
-    });
+    }
   }
 };
 </script>
 <style>
-h3 {
+.heading {
   font-size: 24px;
+  font-weight: 600;
+  margin-left: 10px;
 }
-.spacer {
-  padding: 20px 0px;
-}
-.end {
+.content {
   margin-bottom: 85px;
 }
 </style>

@@ -16,6 +16,7 @@
   </div>
 </template>
 <script>
+import Cookies from "js-cookie";
 import axios from "axios";
 
 import HomeComponent from "~/components/HomeComponent";
@@ -39,10 +40,16 @@ export default {
     Album
   },
   mounted() {
-    axios.get("http://localhost:9000/getAccessToken").then(res => {
+    if (Cookies.get("token") === undefined) {
+      const now = new Date();
+      now.setTime(now.getTime() + 1 * 3600 * 1000);
+      axios.get("http://localhost:9000/getAccessToken").then(res => {
+        Cookies.set("token", res.data, { expires: now });
+      });
+    } else {
       const config = {
         headers: {
-          Authorization: `Bearer ${res.data}`
+          Authorization: `Bearer ${Cookies.get("token")}`
         }
       };
       axios
@@ -58,7 +65,7 @@ export default {
         .catch(err => {
           console.log(err);
         });
-    });
+    }
   }
 };
 </script>

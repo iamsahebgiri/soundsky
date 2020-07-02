@@ -1,89 +1,77 @@
 <template>
-  <div class="row fixed-bottom bottom-bar light mr-0 ml-0">
-    <div class="col-2">
-     <div class="row">
-       <div class="thumb"></div>
-       <div class="col">
-         <span class="playerTitle">{{title}}</span>
-         <br>
-         <span class="playerArtist">{{playerArtist}}</span>
-       </div>
-     </div>
+  <div class="bottom-bar light">
+    <div class="song-info-container">
+      <song-info :title="title" :artist="artist" :thumb="thumb" />
     </div>
-    <div class="col-10 player">
-      <vue-plyr ref="plyr">
-      </vue-plyr>
+    <div class="music-player">
+      <player :src="playing" />
     </div>
   </div>
 </template>
 <script>
 
+import Player from "./Player.vue";
+import SongInfo from "./SongInfo.vue";
 export default {
   data() {
     return {
-      title: 'Baby',
-      playerArtist: 'Justin Bieber',
-    }
+      title: "Control",
+      artist: "Armaan Malik",
+      playing:
+        "https://p.scdn.co/mp3-preview/401a469d4961efa03c42b3c36917a317345f12ff?cid=c05fafe11fb14758be3ec875749d319",
+      thumb: "https://i.scdn.co/image/ab67616d00001e0289a25c637a80550e13ca0973"
+    };
   },
-  methods: {
-    getPlyr() {
-      return this.$refs.plyr.player;
-    }
+  components: {
+    Player,
+    SongInfo
   },
   mounted() {
-    this.$store.watch(() => this.$store.state.currentSong, () => {
-      this.playerArtist = this.$store.state.currentSong.artists[0].name;
-      this.title = this.$store.state.currentSong.name;
-      console.log(this.$store.state.currentSong);
-      this.getPlyr().source = {
-        type: 'audio',
-        autoplay: true,
-        title: 'Example title',
-        sources: [
-          {
-            src: this.$store.state.currentSong.preview_url,
-            type: 'audio/mpeg',
-          }
-        ],
-      };
-    });
-  },
+    this.$store.watch(
+      () => this.$store.state.currentSong,
+      () => {
+        this.artist = this.$store.state.currentSong.artists[0].name;
+        this.title = this.$store.state.currentSong.name;
+        if (this.$store.state.currentSong.preview_url !== null) {
+          this.playing = this.$store.state.currentSong.preview_url;
+        }
+        // if (this.$store.state.currentSong.album.images[2].url !== null) {
+        //   this.thumb = this.$store.state.currentSong.album.images[2].url;
+        // }
 
-}
+        // console.log(this.$store.state.currentSong);
+      }
+    );
+  }
+};
 </script>
 
 <style>
 .bottom-bar {
-  padding: 6px;
+  position: fixed;
+  width: 100%;
+  z-index: 200;
+  bottom: 0;
+  height: 60px;
+  padding: 6px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .bottom-bar.light {
-  background: rgba(51,51,51,0.2);
+  background: rgba(51, 51, 51, 0.2);
   backdrop-filter: saturate(180%) blur(20px);
-  border-top: 1px solid rgba(65,67,78,0.16);
+  border-top: 1px solid rgba(65, 67, 78, 0.16);
 }
 .bottom-bar.dark {
   background: rgba(66, 66, 66, 0.7);
-  border-top: 1px solid rgba(65,67,78,0.16);
+  border-top: 1px solid rgba(65, 67, 78, 0.16);
   backdrop-filter: saturate(180%) blur(20px);
 }
-.song-info {
-  width: 200px;
-  color: var(--text-color);
+.song-info-container {
+  margin-right: 10px;
 }
-.thumb {
-  height: 48px;
-  width: 48px;
-  background: var(--light-gray);
-  border-radius: 6px;
-}
-
-.playerArtist {
-  margin:none;
-  font-size: 14px;
-  color: var(--text-color);
-}
-
-.plyr--audio .plyr__controls {
-  background: none !important;
+.music-player {
+  width: 100%;
 }
 </style>
