@@ -61,7 +61,7 @@ export default {
   ],
 
   //Added serverMiddleware for api
-  serverMiddleware: ['~/api/index.js'],
+  // serverMiddleware: ['~/api/index.js'],
 
   /*
   ** Axios module configuration
