@@ -8,23 +8,22 @@
   </div>
 </template>
 <script>
- 
-import Sidebar from '~/components/Sidebar'
-import BottomPlayer from '~/components/BottomPlayer'
+import Sidebar from "~/components/Sidebar";
+import BottomPlayer from "~/components/BottomPlayer";
 
 export default {
   components: {
     Sidebar,
     BottomPlayer
-  }
-}
+  },
+};
 </script>
 
 <style>
 html,
 body {
-  font-family: -apple-system, "SF Pro Display", Oxygen, Ubuntu, Cantarell, "Open Sans",
-    "Helvetica Neue", sans-serif;
+  font-family: -apple-system, "SF Pro Display", Oxygen, Ubuntu, Cantarell,
+    "Open Sans", "Helvetica Neue", sans-serif;
 }
 :root {
   --dodger-blue: #1377ff;
@@ -37,9 +36,9 @@ body {
   --grey-text: #848484;
   --text-color: #000000;
   --icons-color: #000000;
-  --navigation-gray-4: rgb(209,209,214);
-  --sidebar-gray-6: #F2F2F7;
-  --gray-1: #8E8E93;
+  --navigation-gray-4: rgb(209, 209, 214);
+  --sidebar-gray-6: #f2f2f7;
+  --gray-1: #8e8e93;
 }
 
 .container-fluid.dark {
@@ -47,9 +46,9 @@ body {
   --light-gray: #424242;
   --text-color: #ffffff;
   --icons-color: #ffffff;
-  --navigation-gray-4: rgb(58,58,60);
-  --sidebar-gray-6: #1C1C1E;
-  --gray-1: #8E8E93;
+  --navigation-gray-4: rgb(58, 58, 60);
+  --sidebar-gray-6: #1c1c1e;
+  --gray-1: #8e8e93;
 }
 
 p,
@@ -74,10 +73,10 @@ span {
 .bottom-bar.dark {
   background: rgba(28, 28, 28, 0.7);
 }
-a{
+a {
   text-decoration: none;
 }
-a:hover{
+a:hover {
   text-decoration: none;
 }
 *:focus {
@@ -90,18 +89,34 @@ a:hover{
   margin-left: 16.6666667%;
 }
 /* Rules for sizing the icon. */
-.material-icons.md-18 { font-size: 18px; }
-.material-icons.md-24 { font-size: 24px; }
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-18 {
+  font-size: 18px;
+}
+.material-icons.md-24 {
+  font-size: 24px;
+}
+.material-icons.md-36 {
+  font-size: 36px;
+}
+.material-icons.md-48 {
+  font-size: 48px;
+}
 
 /* Rules for using icons as black on a light background. */
-.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
-.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+.material-icons.md-dark {
+  color: rgba(0, 0, 0, 0.54);
+}
+.material-icons.md-dark.md-inactive {
+  color: rgba(0, 0, 0, 0.26);
+}
 
 /* Rules for using icons as white on a dark background. */
-.material-icons.md-light { color: rgba(255, 255, 255, 1); }
-.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+.material-icons.md-light {
+  color: rgba(255, 255, 255, 1);
+}
+.material-icons.md-light.md-inactive {
+  color: rgba(255, 255, 255, 0.3);
+}
 html.transition,
 html.transition *,
 html.transition *:before,

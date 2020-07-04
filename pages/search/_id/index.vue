@@ -33,14 +33,8 @@ export default {
   components: {
     SearchItem
   },
-  mounted() {
-    if (Cookies.get("token") === undefined) {
-      const now = new Date();
-      now.setTime(now.getTime() + 1 * 3600 * 1000);
-      axios.get("https://soundsky.netlify.app/.netlify/functions/getAccessToken").then(res => {
-        Cookies.set("token", res.data, { expires: now });
-      });
-    } else {
+  methods: {
+    getData() {
       const config = {
         headers: {
           Authorization: `Bearer ${Cookies.get("token")}`
@@ -62,6 +56,18 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    }
+  },
+  mounted() {
+    if (Cookies.get("token") === undefined) {
+      const now = new Date();
+      now.setTime(now.getTime() + 1 * 3600 * 1000);
+      axios.get("https://soundsky.netlify.app/.netlify/functions/getAccessToken").then(res => {
+        Cookies.set("token", res.data, { expires: now });
+        this.getData();
+      });
+    } else {
+      this.getData();
     }
   }
 };

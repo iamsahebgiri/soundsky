@@ -29,11 +29,19 @@ export default {
         this.playhead = progress;
         this.currentTime = Math.floor(music.currentTime);
         this.state = music.networkState;
+        console.log(this.state);
       }
     },
     playingMethod() {
       console.log("playing...");
       this.isPlaying = true;
+    },
+    canPlayMethod() {
+      const music = this.$refs.music;
+      if(this.src !== "https://p.scdn.co/mp3-preview/401a469d4961efa03c42b3c36917a317345f12ff?cid=c05fafe11fb14758be3ec875749d319")
+      {
+        music.play();
+      }
     }
   }
 };
@@ -59,8 +67,8 @@ export default {
         ref="music"
         preload="auto"
         @playing="playingMethod"
+        @canplay="canPlayMethod"
         :src="src"
-        autoplay="true"
         loop="true"
       ></audio>
 
