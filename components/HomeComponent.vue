@@ -1,14 +1,14 @@
 <template>
   <div class="topbox light pb-3 pt-3">
     <TopBar />
-    <div class="carousel-container">
+    <!-- <div class="carousel-container">
       <div class="carousel bg1">
         <img src="~/assets/1.png" />
       </div>
       <div class="carousel bg2">
         <img src="~/assets/2.png" />
       </div>
-    </div>
+    </div> -->
     <Shortcuts></Shortcuts>
   </div>
 </template>

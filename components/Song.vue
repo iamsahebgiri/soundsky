@@ -5,10 +5,10 @@
       <img v-bind:src="item.images[1].url" class="item-image" />
       <div class="overlay">
         <button class="playBtn btn" @click="playHandler">
-          <span class="iconify" data-icon="ion:play" data-inline="false"></span>
+          <span class="iconify play-icon" data-icon="ion:play" data-inline="false"></span>
         </button>
         <button class="downBtn btn" @click="downloadHandler">
-          <span class="iconify" data-icon="ion:download-outline" data-inline="false"></span>
+          <span class="iconify download-icon" data-icon="ion:download-outline" data-inline="false"></span>
         </button>
       </div>
     </div>
@@ -74,10 +74,10 @@ export default {
   cursor: pointer;
 }
 .playBtn {
-  padding: 0 0 0 3px;
+  padding: 0 0 0 1px;
 }
 .downBtn {
-  padding: 0 0 3px 0;
+  padding: 4px 0 0 0;
 }
 .song-container {
   position: relative;
@@ -86,6 +86,7 @@ export default {
 }
 .song-container .item-image,
 .bg {
+  background: var(--gray-1);
   height: 190px;
   width: 190px;
   border-radius: 6px;
@@ -111,5 +112,10 @@ export default {
 
 .song-container:hover .overlay {
   opacity: 1;
+}
+
+.play-icon, .download-icon {
+  width: 24px; 
+  height: 24px;
 }
 </style>

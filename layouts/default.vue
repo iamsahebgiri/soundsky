@@ -22,7 +22,7 @@ export default {
 <style>
 html,
 body {
-  font-family: -apple-system, "SF Pro Display", Oxygen, Ubuntu, Cantarell,
+  font-family: -apple-system, "Inter","Segoe UI", Oxygen, Ubuntu, Cantarell,
     "Open Sans", "Helvetica Neue", sans-serif;
 }
 :root {

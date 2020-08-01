@@ -23,6 +23,7 @@ export default {
   height: 190px;
   width: 190px;
   border-radius: 6px;
+  background: var(--gray-1);
 }
 .album-name {
   margin-top: 8px;

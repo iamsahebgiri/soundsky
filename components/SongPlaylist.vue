@@ -5,11 +5,11 @@
       <img v-bind:src="item.track.album.images[1].url" class="item-image" />
       <div class="overlay">
         <button class="playBtn btn" @click="playHandler">
-          <span class="iconify" data-icon="ion:play" data-inline="false"></span>
+          <span class="iconify play-icon" data-icon="mdi:play" data-inline="false" ></span>
         </button>
         <a class="downBtn btn" :href="item.track.preview_url" target="_blank" :download="item.track.name">
-          <span class="iconify" data-icon="ion:download-outline" data-inline="false"></span>
-        </a>
+          <span class="iconify download-icon" data-icon="mdi:download" data-inline="false"></span>
+        </a> 
       </div>
     </div>
     <div class="song-name text-truncate">{{ item.track.name }}</div>
@@ -49,10 +49,10 @@ export default {
   cursor: pointer;
 }
 .playBtn {
-  padding: 0 0 0 3px;
+  padding: 0 0 0 1px;
 }
 .downBtn {
-  padding: 4px 0 0 1px;
+  padding: 4px 0 0 0;
 }
 .song-container {
   position: relative;
@@ -64,6 +64,7 @@ export default {
   height: 190px;
   width: 190px;
   border-radius: 6px;
+  background: var(--gray-1);
 }
 .bg {
   background: rgba(0, 0, 0, 0.5);
@@ -86,5 +87,9 @@ export default {
 
 .song-container:hover .overlay {
   opacity: 1;
+}
+.play-icon, .download-icon {
+  width: 24px; 
+  height: 24px;
 }
 </style>

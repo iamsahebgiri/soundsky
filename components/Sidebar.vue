@@ -1,5 +1,5 @@
 <template>
-  <div class="col-2 pr-0 pl-0 left-panel position-fixed">
+  <div class="col-2 pr-0 pl-0 left-panel position-fixed overflow-auto">
     <nuxt-link to="/">
       <img src="~/assets/meetwits.svg" alt="Meetwits" class="logo" />
     </nuxt-link>
@@ -61,6 +61,27 @@
             <span class="iconify" data-icon="ion:folder-outline" data-inline="false"></span>Punjabi
           </li>
         </nuxt-link>
+        <nuxt-link to="/category/party" class="my-nav-item">
+          <li>
+            <span class="iconify" data-icon="ion:folder-outline" data-inline="false"></span>Party
+          </li>
+        </nuxt-link>
+        <nuxt-link to="/category/telugu" class="my-nav-item">
+          <li>
+            <span class="iconify" data-icon="ion:folder-outline" data-inline="false"></span>Telugu
+          </li>
+        </nuxt-link>
+        <nuxt-link to="/category/rock" class="my-nav-item">
+          <li>
+            <span class="iconify" data-icon="ion:folder-outline" data-inline="false"></span>Rock
+          </li>
+        </nuxt-link>
+        <nuxt-link to="/category/workout" class="my-nav-item">
+          <li>
+            <span class="iconify" data-icon="ion:folder-outline" data-inline="false"></span>Workout
+          </li>
+        </nuxt-link>
+        
       </ul>
     </div>
   </div>
@@ -72,6 +93,7 @@
 }
 .left-panel {
   height: 100%;
+  padding-bottom: 62px;
 }
 .logo {
   height: 35px;

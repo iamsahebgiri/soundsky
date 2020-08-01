@@ -31,6 +31,10 @@ export default {
       },
       {
         src: "https://code.iconify.design/1/1.0.7/iconify.min.js",
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Inter&display=swap'
       }
     ]
   },
