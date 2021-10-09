@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import ProTip from "components/ProTip";
 import Link from "components/Link";
 import Copyright from "components/Copyright";
+import DarkModeButton from "components/DarkModeButton";
 
 export default function Index() {
   return (
@@ -16,6 +17,7 @@ export default function Index() {
         <Link href="/about" color="secondary">
           Go to the about page
         </Link>
+        <DarkModeButton />
         <ProTip />
         <Copyright />
       </Box>

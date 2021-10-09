@@ -1,19 +1,31 @@
 import { createTheme } from "@mui/material/styles";
-import { red } from "@mui/material/colors";
+import colors from "./colors";
 
 // Create a theme instance.
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#556cd6",
+const theme = (mode: any) =>
+  createTheme({
+    palette: {
+      mode,
+      ...colors,
     },
-    secondary: {
-      main: "#19857b",
+    typography: {
+      fontFamily: [
+        "Inter",
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Roboto",
+        '"Helvetica Neue"',
+        "Arial",
+        "sans-serif",
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+      ].join(","),
+      allVariants: {
+        fontFeatureSettings: ['"cv02"', '"cv03"', '"cv04"', '"cv11"'].join(","),
+      },
     },
-    error: {
-      main: red.A400,
-    },
-  },
-});
+  });
 
 export default theme;
