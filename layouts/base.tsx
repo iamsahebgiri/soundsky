@@ -1,12 +1,5 @@
 import Head from "next/head";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { Box } from "@chakra-ui/react";
-import DarkModeButton from "components/DarkModeButton";
-
-const ProgressBar = dynamic(() => import("../components/ProgressBar"), {
-  ssr: false,
-});
 
 export default function BaseLayout(props: any) {
   const { children, ...customMeta } = props;
@@ -19,9 +12,9 @@ export default function BaseLayout(props: any) {
     ...customMeta,
   };
   return (
-    <Box>
+    <div>
       <Head>
-        <title>{`${meta.title} / SoundSky`}</title>
+        <title>{`${meta.title} - SoundSky`}</title>
         <meta name="robots" content="follow, index" />
         <meta content={meta.description} name="description" />
         <meta
@@ -46,11 +39,7 @@ export default function BaseLayout(props: any) {
           <meta property="article:published_time" content={meta.date} />
         )}
       </Head>
-      <ProgressBar />
-      <DarkModeButton />
-      <Box py={16} minH="100vh">
-        {children}
-      </Box>
-    </Box>
+      <div>{children}</div>
+    </div>
   );
 }

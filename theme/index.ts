@@ -1,18 +1,19 @@
-import { extendTheme } from '@chakra-ui/react';
+import { createTheme } from "@mui/material/styles";
+import { red } from "@mui/material/colors";
 
-import components from "./components"
-import foundations from "./foundations"
-import styles from "./styles"
-
-const theme = extendTheme({
-  ...foundations,
-  components,
-  styles,
-  config: {
-    initialColorMode: 'dark',
-    useSystemColorMode: false,
-    cssVarPrefix: 'ck'
-  }
+// Create a theme instance.
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#556cd6",
+    },
+    secondary: {
+      main: "#19857b",
+    },
+    error: {
+      main: red.A400,
+    },
+  },
 });
 
 export default theme;
