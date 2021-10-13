@@ -1,17 +1,15 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import Toolbar from "@mui/material/Toolbar";
 import Logo from "components/Logo";
 import Scrollbar from "components/ScrollBar";
-import { MdInbox, MdMail } from "react-icons/md";
 import { DRAWER_WIDTH } from "utils/constants";
+import NavItem from "./NavItem";
+import sidebarConfig from "config/SidebarConfig";
+import { Theme } from "@mui/material/styles";
 
 interface Props {
   mobileOpen: boolean;
@@ -33,41 +31,13 @@ export default function Sidebar(props: Props) {
         <List
           subheader={
             <ListSubheader disableSticky sx={{ textTransform: "uppercase" }}>
-              Settings
+              Library
             </ListSubheader>
           }
+          sx={{ px: "1rem" }}
         >
-          {[
-            "Inbox",
-            "Starred",
-            "Send email",
-            "Drafts",
-            "Inbox",
-            "Starred",
-            "Send email",
-            "Drafts",
-            "Inbox",
-            "Starred",
-            "Send email",
-            "Drafts",
-          ].map((text, index) => (
-            <ListItem button key={index}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <MdInbox /> : <MdMail />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <MdInbox /> : <MdMail />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
+          {sidebarConfig.map((item) => (
+            <NavItem key={item.title} item={item} />
           ))}
         </List>
       </Scrollbar>
@@ -78,7 +48,7 @@ export default function Sidebar(props: Props) {
     <Box
       component="nav"
       sx={{ width: { sm: DRAWER_WIDTH }, flexShrink: { sm: 0 } }}
-      aria-label="mailbox folders"
+      aria-label="Libraries and playlists"
     >
       {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
       <Drawer
@@ -106,6 +76,10 @@ export default function Sidebar(props: Props) {
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
             width: DRAWER_WIDTH,
+            bgcolor: (theme: Theme) =>
+              theme.palette.mode === "dark"
+                ? theme.palette.grey[800]
+                : theme.palette.grey[50],
           },
         }}
         open

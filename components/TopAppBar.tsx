@@ -9,6 +9,7 @@ import Searchbar from "components/SearchBar";
 import { HiOutlineCog } from "react-icons/hi";
 import { MdMenu } from "react-icons/md";
 import { DRAWER_WIDTH } from "utils/constants";
+import { Theme } from "@mui/material";
 
 interface TopAppBarProps {
   handleDrawerToggle: () => void;
@@ -18,8 +19,12 @@ export default function TopAppBar({ handleDrawerToggle }: TopAppBarProps) {
   return (
     <AppBar
       elevation={0}
+      color="default"
       sx={{
-        bgcolor: "grey[200]",
+        bgcolor: (theme: Theme) =>
+          theme.palette.mode === "dark"
+            ? theme.palette.grey[900]
+            : theme.palette.common.white,
         width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` },
         ml: { sm: `${DRAWER_WIDTH}px` },
       }}
@@ -36,7 +41,7 @@ export default function TopAppBar({ handleDrawerToggle }: TopAppBarProps) {
         </IconButton>
         <Box sx={{ flexGrow: 1 }} />
         <Stack direction="row" spacing={1}>
-          <Searchbar />
+          {/* <Searchbar /> */}
           <DarkModeButton />
           <IconButton color="inherit">
             <HiOutlineCog />

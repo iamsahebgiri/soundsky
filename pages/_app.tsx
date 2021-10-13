@@ -2,10 +2,10 @@ import type { AppProps } from "next/app";
 import * as React from "react";
 import "@fontsource/inter/variable-full.css";
 import "simplebar/dist/simplebar.min.css";
-import { ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider, EmotionCache } from "@emotion/react";
-import customTheme from "theme";
+import { getDesignTokens } from "theme";
 import createEmotionCache from "utils/createEmotionCache";
 import { ColorModeContext } from "utils/colorModeContext";
 
@@ -29,7 +29,7 @@ export default function MyApp(props: MyAppProps) {
     []
   );
 
-  const theme = React.useMemo(() => customTheme(mode), [mode]);
+  const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
   return (
     <ColorModeContext.Provider value={colorMode}>

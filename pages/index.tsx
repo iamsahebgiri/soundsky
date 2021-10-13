@@ -1,27 +1,48 @@
 import * as React from "react";
 import Typography from "@mui/material/Typography";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
 import MainLayout from "layouts/main";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Container from "@mui/material/Container";
+import Image from "next/image";
+import { Icon } from "@iconify/react";
+import { IconButton, ImageListItemBar, ListSubheader } from "@mui/material";
+
+const Item = styled("div")(({ theme }) => ({
+  padding: theme.spacing(1),
+  color: theme.palette.grey[700],
+  fontWeight: 800,
+}));
+
+const GridContainer = styled(Box)(({ theme }) => ({
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+  gridGap: 16,
+}));
 
 export default function Index() {
   return (
     <MainLayout>
-      {Array.from({ length: 10 }).map((_, i) => (
-        <Typography paragraph key={i}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-          dolor purus non enim praesent elementum facilisis leo vel. Risus at
-          ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
-          quisque non tellus. Convallis convallis tellus id interdum velit
-          laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
-          adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-          integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-          eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-          quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-          vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-          lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-          faucibus et molestie ac.
-        </Typography>
-      ))}
+      <Container maxWidth="xl">
+        <GridContainer>
+          {Array.from({ length: 30 }).map((_, i) => (
+            <Item key={i}>
+              <Image
+                src="https://i.scdn.co/image/ab67616d00001e0269154eeb4cc75a6008013552"
+                alt="Picture of the author"
+                width={300}
+                height={300}
+                placeholder="blur"
+                blurDataURL="https://i.scdn.co/image/ab67616d0000485169154eeb4cc75a6008013552"
+              />
+              <Typography>Rahman Ruling 90s</Typography>
+            </Item>
+          ))}
+        </GridContainer>
+      </Container>
     </MainLayout>
   );
 }
