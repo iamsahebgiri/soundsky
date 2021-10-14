@@ -1,26 +1,23 @@
-import * as React from "react";
-import Typography from "@mui/material/Typography";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
-import MainLayout from "layouts/main";
-import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
+import { styled } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import MainLayout from "layouts/main";
 import Image from "next/image";
-import { Icon } from "@iconify/react";
-import { IconButton, ImageListItemBar, ListSubheader } from "@mui/material";
+import * as React from "react";
 
 const Item = styled("div")(({ theme }) => ({
-  padding: theme.spacing(1),
   color: theme.palette.grey[700],
   fontWeight: 800,
+  "& img": {
+    borderRadius: theme.shape.borderRadius,
+  },
 }));
 
 const GridContainer = styled(Box)(({ theme }) => ({
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
-  gridGap: 16,
+  gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+  gridGap: theme.spacing(2),
 }));
 
 export default function Index() {
