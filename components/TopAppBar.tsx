@@ -1,53 +1,49 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import Stack from "@mui/material/Stack";
-import Toolbar from "@mui/material/Toolbar";
+import {
+  Box,
+  Icon,
+  IconButton,
+  Spacer,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import DarkModeButton from "components/DarkModeButton";
-import Searchbar from "components/SearchBar";
+import Toolbar from "components/Toolbar";
+import { DRAWER_WIDTH } from "config/constants";
+import * as React from "react";
 import { HiOutlineCog } from "react-icons/hi";
 import { MdMenu } from "react-icons/md";
-import { DRAWER_WIDTH } from "utils/constants";
-import { Theme } from "@mui/material";
 
 interface TopAppBarProps {
-  handleDrawerToggle: () => void;
+  onOpen: () => void;
 }
 
-export default function TopAppBar({ handleDrawerToggle }: TopAppBarProps) {
+export default function TopAppBar({ onOpen }: TopAppBarProps) {
   return (
-    <AppBar
-      elevation={0}
-      color="default"
-      sx={{
-        bgcolor: (theme: Theme) =>
-          theme.palette.mode === "dark"
-            ? theme.palette.grey[900]
-            : theme.palette.common.white,
-        width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` },
-        ml: { sm: `${DRAWER_WIDTH}px` },
-      }}
+    <Box
+      position="fixed"
+      h="14"
+      bgColor={useColorModeValue("white", "gray.900")}
+      zIndex="10"
+      ml={{ sm: `${DRAWER_WIDTH}px` }}
+      width={{ base: "full", sm: `calc(100% - ${DRAWER_WIDTH}px)` }}
     >
       <Toolbar>
         <IconButton
-          color="inherit"
+          onClick={onOpen}
+          variant="ghost"
+          rounded="full"
           aria-label="open drawer"
-          edge="start"
-          onClick={handleDrawerToggle}
-          sx={{ mr: 2, display: { sm: "none" } }}
-        >
-          <MdMenu />
-        </IconButton>
-        <Box sx={{ flexGrow: 1 }} />
-        <Stack direction="row" spacing={1}>
-          {/* <Searchbar /> */}
-          <DarkModeButton />
-          <IconButton color="inherit">
-            <HiOutlineCog />
-          </IconButton>
-        </Stack>
+          icon={<Icon h="6" w="6" as={MdMenu} />}
+          display={{ sm: "none" }}
+        />
+        <Spacer />
+        <DarkModeButton />
+        <IconButton
+          variant="ghost"
+          rounded="full"
+          aria-label="Settings"
+          icon={<Icon h="6" w="6" as={HiOutlineCog} />}
+        />
       </Toolbar>
-    </AppBar>
+    </Box>
   );
 }

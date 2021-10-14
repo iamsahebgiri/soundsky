@@ -1,30 +1,26 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
 import Sidebar from "components/SideBar";
 import TopAppBar from "components/TopAppBar";
+import Toolbar from "components/Toolbar";
 import BaseLayout from "./base";
 
-export default function MainLayout({ children }: any) {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+import { Flex, Box, useDisclosure } from "@chakra-ui/react";
+import { DRAWER_WIDTH } from "config/constants";
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+export default function MainLayout({ children }: any) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <BaseLayout>
-      <Box sx={{ display: "flex" }}>
-        <TopAppBar handleDrawerToggle={handleDrawerToggle} />
-        <Sidebar
-          handleDrawerToggle={handleDrawerToggle}
-          mobileOpen={mobileOpen}
-        />
-        <Box component="main" sx={{ flexGrow: 1, py: 3 }}>
+      <Flex>
+        <Sidebar isOpen={isOpen} onClose={onClose} />
+        <TopAppBar onOpen={onOpen} />
+
+        <Box ml={{ sm: `${DRAWER_WIDTH}px` }} as="main" flexGrow={1} py={3}>
           <Toolbar />
           {children}
         </Box>
-      </Box>
+      </Flex>
     </BaseLayout>
   );
 }

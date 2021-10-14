@@ -1,5 +1,10 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+
+const ProgressBar = dynamic(() => import("../components/ProgressBar"), {
+  ssr: false,
+});
 
 export default function BaseLayout(props: any) {
   const { children, ...customMeta } = props;
@@ -39,6 +44,7 @@ export default function BaseLayout(props: any) {
           <meta property="article:published_time" content={meta.date} />
         )}
       </Head>
+      <ProgressBar />
       <div>{children}</div>
     </div>
   );

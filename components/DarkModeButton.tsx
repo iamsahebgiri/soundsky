@@ -1,19 +1,18 @@
-import React from "react";
-import IconButton from "@mui/material/IconButton";
-import { useTheme } from "@mui/material/styles";
-import { ColorModeContext } from "utils/colorModeContext";
+import { Icon, IconButton, useColorMode } from "@chakra-ui/react";
 import { HiMoon, HiSun } from "react-icons/hi";
 
-export default function DarkModeButton() {
-  const theme = useTheme();
-  const colorMode = React.useContext(ColorModeContext);
+const DarkModeButton = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
     <IconButton
-      sx={{ ml: 1 }}
-      onClick={colorMode.toggleColorMode}
-      color="inherit"
-    >
-      {theme.palette.mode === "dark" ? <HiSun /> : <HiMoon />}
-    </IconButton>
+      onClick={toggleColorMode}
+      rounded="full"
+      variant="ghost"
+      aria-label="Toggle dark mode"
+      icon={<Icon h="6" w="6" as={colorMode === "light" ? HiMoon : HiSun} />}
+      _focus={{ boxShadow: "none" }}
+    />
   );
-}
+};
+
+export default DarkModeButton;

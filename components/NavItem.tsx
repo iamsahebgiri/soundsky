@@ -1,11 +1,8 @@
-import Button from "@mui/material/Button";
-import ListItem from "@mui/material/ListItem";
-import Link from "components/Link";
+import { Box, Flex, Link, Text, useColorModeValue } from "@chakra-ui/react";
 import { IconifyIcon } from "@iconify/react";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
-import { Theme } from "@mui/material/styles";
-import SvgIcon from "@mui/material/SvgIcon";
-import NoSsr from "@mui/material/NoSsr";
+
 
 interface NavItemProps {
   item: {
@@ -15,71 +12,56 @@ interface NavItemProps {
   };
 }
 
-const NavItem = ({ item, ...rest }: NavItemProps) => {
+const NavItem = ({ item }: NavItemProps) => {
   const { href, icon, title } = item;
   const router = useRouter();
-  const active = router.asPath === href;
+  const isActive = router.asPath === href;
 
   return (
-    <ListItem
-      disableGutters
-      sx={{
-        display: "flex",
-        py: 0,
-      }}
-      {...rest}
-    >
-      <Button
-        component={Link}
+    <NextLink href={href} passHref>
+      <Link
+        width="full"
         sx={{
-          color: (theme: Theme) =>
-            theme.palette.mode === "dark"
-              ? theme.palette.grey[500]
-              : theme.palette.grey[600],
-          justifyContent: "flex-start",
-          letterSpacing: 0.1,
-          px: 1.2,
-          fontSize: 14,
-          fontWeight: 500,
-          textTransform: "capitalize",
-          width: "100%",
-          "& svg": {
-            mr: 1.2,
+          _hover: {
+            bgColor: useColorModeValue("indigo.50", "gray.700"),
           },
-          ...(active && {
-            color: (theme: Theme) =>
-              theme.palette.mode === "dark"
-                ? theme.palette.primary[100]
-                : theme.palette.primary[600],
-            bgcolor: (theme: Theme) =>
-              theme.palette.mode === "dark"
-                ? theme.palette.primaryDark[700]
-                : theme.palette.primary[100],
-          }),
+          _focus: {
+            boxShadow: "none",
+          },
         }}
-        disableRipple
-        href={href}
+        rounded="md"
       >
-        <NoSsr>
-          <SvgIcon
-            sx={{
-              color: (theme: Theme) =>
-                theme.palette.mode === "dark"
-                  ? theme.palette.grey[500]
-                  : theme.palette.grey[600],
-              ...(active && {
-                color: (theme: Theme) =>
-                  theme.palette.mode === "dark"
-                    ? theme.palette.primary[100]
-                    : theme.palette.primary[600],
-              }),
-            }}
-            children={icon}
-          />
-        </NoSsr>
-        {title}
-      </Button>
-    </ListItem>
+        <Flex
+          alignItems="center"
+          bgColor={isActive ? useColorModeValue("indigo.100", "gray.700") : ""}
+          px="3"
+          py="1.5"
+          rounded="md"
+        >
+          <Box
+            color={
+              isActive
+                ? useColorModeValue("indigo.700", "indigo.200")
+                : useColorModeValue("gray.600", "gray.500")
+            }
+          >
+            {icon}
+          </Box>
+          <Text
+            color={
+              isActive
+                ? useColorModeValue("indigo.700", "indigo.200")
+                : useColorModeValue("gray.600", "gray.500")
+            }
+            fontWeight={isActive ? "medium" : ""}
+            ml="3"
+            fontSize="15px"
+          >
+            {title}
+          </Text>
+        </Flex>
+      </Link>
+    </NextLink>
   );
 };
 

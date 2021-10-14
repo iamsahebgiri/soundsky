@@ -1,90 +1,98 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListSubheader from "@mui/material/ListSubheader";
-import Toolbar from "@mui/material/Toolbar";
+import {
+  Box,
+  Drawer,
+  DrawerContent,
+  DrawerOverlay,
+  Text,
+  useColorModeValue,
+  VStack,
+} from "@chakra-ui/react";
 import Logo from "components/Logo";
-import Scrollbar from "components/ScrollBar";
-import { DRAWER_WIDTH } from "utils/constants";
-import NavItem from "./NavItem";
+import Toolbar from "components/Toolbar";
+import { DRAWER_WIDTH } from "config/constants";
 import sidebarConfig from "config/SidebarConfig";
-import { Theme } from "@mui/material/styles";
+import Link from "next/link";
+import * as React from "react";
+import NavItem from "./NavItem";
+import Scrollbar from "./ScrollBar";
 
 interface Props {
-  mobileOpen: boolean;
-  handleDrawerToggle: () => void;
-  window?: () => Window;
+  isOpen: boolean;
+  onClose(): void;
 }
 
 export default function Sidebar(props: Props) {
-  const { window, mobileOpen, handleDrawerToggle } = props;
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
+  const { isOpen, onClose } = props;
 
-  const drawer = (
+  const drawerContent = (
     <>
-      <Toolbar>
-        <Logo />
-      </Toolbar>
+      <Box
+        w={`${DRAWER_WIDTH - 1}px`}
+        position="fixed"
+        h="14"
+        bgColor={useColorModeValue("gray.50", "gray.800")}
+      >
+        <Toolbar>
+          <Link href="/">
+            <a>
+              <Logo />
+            </a>
+          </Link>
+        </Toolbar>
+      </Box>
+      <Toolbar />
       <Scrollbar>
-        <List
-          subheader={
-            <ListSubheader disableSticky sx={{ textTransform: "uppercase" }}>
-              Library
-            </ListSubheader>
-          }
-          sx={{ px: "1rem" }}
-        >
+        <Box py="3" px="4">
+          <Text
+            fontSize="14px"
+            color={useColorModeValue("gray.500", "gray.400")}
+            fontWeight="medium"
+            textTransform="uppercase"
+            letterSpacing="wide"
+          >
+            Library
+          </Text>
+        </Box>
+        <VStack spacing="0" px="4">
           {sidebarConfig.map((item) => (
-            <NavItem key={item.title} item={item} />
+            <NavItem item={item} key={item.href} />
           ))}
-        </List>
+        </VStack>
       </Scrollbar>
     </>
   );
 
+  const PermanentDrawer = () => (
+    <Box
+      display={{ base: "none", sm: "block" }}
+      w={DRAWER_WIDTH}
+      h="100vh"
+      position="fixed"
+    >
+      {drawerContent}
+    </Box>
+  );
+
   return (
     <Box
-      component="nav"
-      sx={{ width: { sm: DRAWER_WIDTH }, flexShrink: { sm: 0 } }}
-      aria-label="Libraries and playlists"
+      as="nav"
+      bg={useColorModeValue("gray.50", "gray.800")}
+      width={{ sm: DRAWER_WIDTH }}
+      h={{ sm: "100vh" }}
+      position="fixed"
+      flexShrink={{ sm: 0 }}
+      borderRight="1px"
+      borderColor={useColorModeValue("gray.200", "gray.700")}
     >
-      {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-      <Drawer
-        container={container}
-        variant="temporary"
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-        ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
-        }}
-        sx={{
-          display: { xs: "block", sm: "none" },
-          "& .MuiDrawer-paper": {
-            boxSizing: "border-box",
-            width: DRAWER_WIDTH,
-          },
-        }}
-      >
-        {drawer}
-      </Drawer>
-      <Drawer
-        variant="permanent"
-        sx={{
-          display: { xs: "none", sm: "block" },
-          "& .MuiDrawer-paper": {
-            boxSizing: "border-box",
-            width: DRAWER_WIDTH,
-            bgcolor: (theme: Theme) =>
-              theme.palette.mode === "dark"
-                ? theme.palette.grey[800]
-                : theme.palette.grey[50],
-          },
-        }}
-        open
-      >
-        {drawer}
+      <PermanentDrawer />
+      <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
+        <DrawerOverlay />
+        <DrawerContent
+          bgColor={useColorModeValue("gray.50", "gray.800")}
+          maxW={60}
+        >
+          {drawerContent}
+        </DrawerContent>
       </Drawer>
     </Box>
   );

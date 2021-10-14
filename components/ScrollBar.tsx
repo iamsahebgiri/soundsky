@@ -1,33 +1,5 @@
+import { Box, Flex, useColorModeValue } from "@chakra-ui/react";
 import SimpleBarReact from "simplebar-react";
-import { alpha, styled } from "@mui/material/styles";
-import { Box } from "@mui/material";
-
-const RootStyle = styled("div")({
-  flexGrow: 1,
-  height: "100%",
-  overflow: "hidden",
-});
-
-const SimpleBarStyle = styled(SimpleBarReact)(({ theme }) => ({
-  maxHeight: "100%",
-  "& .simplebar-scrollbar": {
-    "&:before": {
-      backgroundColor: alpha(theme.palette.grey[600], 0.48),
-    },
-    "&.simplebar-visible:before": {
-      opacity: 1,
-    },
-  },
-  "& .simplebar-track.simplebar-vertical": {
-    width: 10,
-  },
-  "& .simplebar-track.simplebar-horizontal .simplebar-scrollbar": {
-    height: 6,
-  },
-  "& .simplebar-mask": {
-    zIndex: "inherit",
-  },
-}));
 
 export default function Scrollbar({ children, sx, ...other }: any) {
   let isMobile = false;
@@ -39,18 +11,42 @@ export default function Scrollbar({ children, sx, ...other }: any) {
   }
 
   if (isMobile) {
-    return (
-      <Box sx={{ overflowX: "auto", ...sx }} {...other}>
-        {children}
-      </Box>
-    );
+    return <Box overflowX="auto">{children}</Box>;
   }
 
   return (
-    <RootStyle>
-      <SimpleBarStyle timeout={500} clickOnTrack={false} sx={sx} {...other}>
+    <Flex
+      direction="column"
+      flexGrow={1}
+      maxH="100%"
+      overflow="hidden"
+      sx={{
+        "& .simplebar-scrollbar": {
+          "&:before": {
+            backgroundColor: useColorModeValue("gray.300", "gray.700"),
+          },
+          "&.simplebar-visible:before": {
+            opacity: 1,
+          },
+        },
+        "& .simplebar-track.simplebar-vertical": {
+          width: 3,
+        },
+        "& .simplebar-track.simplebar-horizontal .simplebar-scrollbar": {
+          height: 6,
+        },
+        "& .simplebar-mask": {
+          zIndex: "inherit",
+        },
+      }}
+    >
+      <SimpleBarReact
+        style={{ maxHeight: `calc(100vh - 60px)` }}
+        timeout={500}
+        clickOnTrack={false}
+      >
         {children}
-      </SimpleBarStyle>
-    </RootStyle>
+      </SimpleBarReact>
+    </Flex>
   );
 }

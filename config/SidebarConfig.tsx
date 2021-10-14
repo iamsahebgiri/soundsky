@@ -8,46 +8,47 @@ import sippyCup from "@iconify/icons-icon-park-outline/sippy-cup";
 import autoFocus from "@iconify/icons-icon-park-outline/auto-focus";
 import dumbbell from "@iconify/icons-icon-park-outline/dumbbell";
 
-const getIcon = (name: IconifyIcon) => (
-  <Icon icon={name} width={21} height={21} />
-);
+const GetIcon = (name: IconifyIcon) => {
+  return <Icon icon={name} width={21} height={21} />;
+};
 
 const sidebarConfig = [
   {
     title: "Top",
     href: "/category/top",
-    icon: getIcon(browserSafari),
+    icon: GetIcon(browserSafari),
   },
   {
     title: "Trendings",
     href: "/category/trendings",
-    icon: getIcon(trendingUp),
+    icon: GetIcon(trendingUp),
   },
   {
     title: "Gaming",
     href: "/category/gaming",
-    icon: getIcon(gamePs),
+    icon: GetIcon(gamePs),
   },
   {
     title: "Mood",
     href: "/category/mood",
-    icon: getIcon(ovalLoveTwo),
+    icon: GetIcon(ovalLoveTwo),
   },
   {
     title: "Chill",
     href: "/category/chill",
-    icon: getIcon(sippyCup),
+    icon: GetIcon(sippyCup),
   },
   {
     title: "Focus",
     href: "/category/focus",
-    icon: getIcon(autoFocus),
+    icon: GetIcon(autoFocus),
   },
   {
     title: "Workout",
     href: "/category/workout",
-    icon: getIcon(dumbbell),
+    icon: GetIcon(dumbbell),
   },
+  
 ];
 
 export default sidebarConfig;
