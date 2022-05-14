@@ -4,6 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Sidebar from "components/SideBar";
 import TopAppBar from "components/TopAppBar";
 import BaseLayout from "./base";
+import BottomPlayer from "components/BottomPlayer";
 
 export default function MainLayout({ children }: any) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -25,6 +26,7 @@ export default function MainLayout({ children }: any) {
           {children}
         </Box>
       </Box>
+      <BottomPlayer />
     </BaseLayout>
   );
 }

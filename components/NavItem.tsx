@@ -1,17 +1,17 @@
 import Button from "@mui/material/Button";
 import ListItem from "@mui/material/ListItem";
 import Link from "components/Link";
-import { IconifyIcon } from "@iconify/react";
 import { useRouter } from "next/router";
 import { Theme } from "@mui/material/styles";
 import SvgIcon from "@mui/material/SvgIcon";
+import { Icon, IconifyIcon } from "@iconify/react";
 import NoSsr from "@mui/material/NoSsr";
 
 interface NavItemProps {
   item: {
     href: string;
     title: string;
-    icon: IconifyIcon | JSX.Element;
+    icon: IconifyIcon | string;
   };
 }
 
@@ -26,6 +26,7 @@ const NavItem = ({ item, ...rest }: NavItemProps) => {
       sx={{
         display: "flex",
         py: 0,
+        px: 1.5,
       }}
       {...rest}
     >
@@ -34,7 +35,7 @@ const NavItem = ({ item, ...rest }: NavItemProps) => {
         sx={{
           color: (theme: Theme) =>
             theme.palette.mode === "dark"
-              ? theme.palette.grey[500]
+              ? theme.palette.grey[400]
               : theme.palette.grey[600],
           justifyContent: "flex-start",
           letterSpacing: 0.1,
@@ -56,6 +57,16 @@ const NavItem = ({ item, ...rest }: NavItemProps) => {
                 ? theme.palette.primaryDark[700]
                 : theme.palette.primary[100],
           }),
+          "&:hover": {
+            bgcolor: (theme: Theme) =>
+              theme.palette.mode === "dark"
+                ? active
+                  ? theme.palette.primaryDark[700]
+                  : theme.palette.grey[700]
+                : active
+                ? theme.palette.primary[100]
+                : theme.palette.grey[100],
+          },
         }}
         disableRipple
         href={href}
@@ -65,7 +76,7 @@ const NavItem = ({ item, ...rest }: NavItemProps) => {
             sx={{
               color: (theme: Theme) =>
                 theme.palette.mode === "dark"
-                  ? theme.palette.grey[500]
+                  ? theme.palette.grey[400]
                   : theme.palette.grey[600],
               ...(active && {
                 color: (theme: Theme) =>
@@ -74,8 +85,9 @@ const NavItem = ({ item, ...rest }: NavItemProps) => {
                     : theme.palette.primary[600],
               }),
             }}
-            children={icon}
-          />
+          >
+            <Icon icon={icon} height="21" width="21" />
+          </SvgIcon>
         </NoSsr>
         {title}
       </Button>

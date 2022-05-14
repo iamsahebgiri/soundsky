@@ -1,53 +1,82 @@
-import * as React from "react";
-import { Icon, IconifyIcon } from "@iconify/react";
-import browserSafari from "@iconify/icons-icon-park-outline/browser-safari";
-import trendingUp from "@iconify/icons-icon-park-outline/trending-up";
-import gamePs from "@iconify/icons-icon-park-outline/game-ps";
-import ovalLoveTwo from "@iconify/icons-icon-park-outline/oval-love-two";
-import sippyCup from "@iconify/icons-icon-park-outline/sippy-cup";
-import autoFocus from "@iconify/icons-icon-park-outline/auto-focus";
-import dumbbell from "@iconify/icons-icon-park-outline/dumbbell";
+import home24Regular from "@iconify/icons-fluent/home-24-regular";
+import dumbbell24Regular from "@iconify/icons-fluent/dumbbell-24-regular";
+import heart24Regular from "@iconify/icons-fluent/heart-24-regular";
+import arrowTrending24Regular from "@iconify/icons-fluent/arrow-trending-24-regular";
+import games24Regular from "@iconify/icons-fluent/games-24-regular";
+import beach24Regular from "@iconify/icons-fluent/beach-24-regular";
+import trophy24Regular from "@iconify/icons-fluent/trophy-24-regular";
+import foodGrains24Regular from "@iconify/icons-fluent/food-grains-24-regular";
+import folder24Regular from "@iconify/icons-fluent/folder-24-regular";
 
-const getIcon = (name: IconifyIcon) => (
-  <Icon icon={name} width={21} height={21} />
-);
-
-const sidebarConfig = [
+const libraries = [
+  {
+    title: "Home",
+    href: "/",
+    icon: home24Regular,
+  },
   {
     title: "Top",
     href: "/category/top",
-    icon: getIcon(browserSafari),
+    icon: trophy24Regular,
   },
   {
     title: "Trendings",
     href: "/category/trendings",
-    icon: getIcon(trendingUp),
+    icon: arrowTrending24Regular,
   },
   {
     title: "Gaming",
     href: "/category/gaming",
-    icon: getIcon(gamePs),
+    icon: games24Regular,
   },
   {
     title: "Mood",
     href: "/category/mood",
-    icon: getIcon(ovalLoveTwo),
+    icon: heart24Regular,
   },
   {
     title: "Chill",
     href: "/category/chill",
-    icon: getIcon(sippyCup),
+    icon: beach24Regular,
   },
   {
     title: "Focus",
     href: "/category/focus",
-    icon: getIcon(autoFocus),
+    icon: foodGrains24Regular,
   },
   {
     title: "Workout",
     href: "/category/workout",
-    icon: getIcon(dumbbell),
+    icon: dumbbell24Regular,
   },
 ];
 
-export default sidebarConfig;
+const playlists = [
+  {
+    title: "Classical",
+    href: "/category/classical",
+    icon: folder24Regular,
+  },
+  {
+    title: "Bollywood",
+    href: "/category/bollywood",
+    icon: folder24Regular,
+  },
+  {
+    title: "Party",
+    href: "/category/party",
+    icon: folder24Regular,
+  },
+  {
+    title: "Punjabi",
+    href: "/category/punjabi",
+    icon: folder24Regular,
+  },
+  {
+    title: "Telugu",
+    href: "/category/telugu",
+    icon: folder24Regular,
+  },
+];
+
+export { libraries, playlists };

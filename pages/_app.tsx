@@ -18,7 +18,6 @@ interface MyAppProps extends AppProps {
 
 export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-
   const [mode, setMode] = React.useState<"light" | "dark">("light");
   const colorMode = React.useMemo(
     () => ({
@@ -30,6 +29,18 @@ export default function MyApp(props: MyAppProps) {
   );
 
   const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
+  const [showChild, setShowChild] = React.useState(false);
+  React.useEffect(() => {
+    setShowChild(true);
+  }, []);
+
+  if (!showChild) {
+    return null;
+  }
+
+  if (typeof window === "undefined") {
+    return <></>;
+  }
 
   return (
     <ColorModeContext.Provider value={colorMode}>

@@ -8,39 +8,54 @@ import Logo from "components/Logo";
 import Scrollbar from "components/ScrollBar";
 import { DRAWER_WIDTH } from "utils/constants";
 import NavItem from "./NavItem";
-import sidebarConfig from "config/SidebarConfig";
+import { libraries, playlists } from "config/SidebarConfig";
 import { Theme } from "@mui/material/styles";
 
 interface Props {
   mobileOpen: boolean;
   handleDrawerToggle: () => void;
-  window?: () => Window;
 }
 
 export default function Sidebar(props: Props) {
-  const { window, mobileOpen, handleDrawerToggle } = props;
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
+  const { mobileOpen, handleDrawerToggle } = props;
 
   const drawer = (
     <>
-      <Toolbar>
+      <Toolbar
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          py: "1rem",
+          px: "1rem",
+        }}
+        disableGutters
+      >
         <Logo />
       </Toolbar>
       <Scrollbar>
         <List
-          subheader={
-            <ListSubheader disableSticky sx={{ textTransform: "uppercase" }}>
-              Library
-            </ListSubheader>
-          }
-          sx={{ px: "1rem" }}
+          subheader={<ListSubheader disableSticky>Library</ListSubheader>}
+          sx={{ px: "0.2rem" }}
         >
-          {sidebarConfig.map((item) => (
+          {libraries.map((item) => (
+            <NavItem key={item.title} item={item} />
+          ))}
+        </List>
+        <List
+          subheader={<ListSubheader disableSticky>Playlists</ListSubheader>}
+          sx={{ px: "0.2rem" }}
+        >
+          {playlists.map((item) => (
             <NavItem key={item.title} item={item} />
           ))}
         </List>
       </Scrollbar>
+      <Box
+        sx={{
+          display: { xs: "none", sm: "block" },
+        }}
+        pb="4.5rem"
+      />
     </>
   );
 
@@ -52,7 +67,6 @@ export default function Sidebar(props: Props) {
     >
       {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
       <Drawer
-        container={container}
         variant="temporary"
         open={mobileOpen}
         onClose={handleDrawerToggle}
@@ -73,6 +87,7 @@ export default function Sidebar(props: Props) {
         variant="permanent"
         sx={{
           display: { xs: "none", sm: "block" },
+
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
             width: DRAWER_WIDTH,
@@ -80,6 +95,7 @@ export default function Sidebar(props: Props) {
               theme.palette.mode === "dark"
                 ? theme.palette.grey[800]
                 : theme.palette.grey[50],
+            border: (theme: Theme) => theme.palette.mode === "dark" && "none",
           },
         }}
         open

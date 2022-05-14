@@ -6,8 +6,10 @@ import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
 import DarkModeButton from "components/DarkModeButton";
 import Searchbar from "components/SearchBar";
-import { HiOutlineCog } from "react-icons/hi";
-import { MdMenu } from "react-icons/md";
+import { Icon } from "@iconify/react";
+import navigation24Regular from "@iconify/icons-fluent/navigation-24-regular";
+import settings24Regular from "@iconify/icons-fluent/settings-24-regular";
+
 import { DRAWER_WIDTH } from "utils/constants";
 import { Theme } from "@mui/material";
 
@@ -27,6 +29,11 @@ export default function TopAppBar({ handleDrawerToggle }: TopAppBarProps) {
             : theme.palette.common.white,
         width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` },
         ml: { sm: `${DRAWER_WIDTH}px` },
+        borderBottom: "1px solid",
+        borderBottomColor: (theme: Theme) =>
+          theme.palette.mode === "dark"
+            ? theme.palette.grey[800]
+            : theme.palette.grey[200],
       }}
     >
       <Toolbar>
@@ -37,15 +44,15 @@ export default function TopAppBar({ handleDrawerToggle }: TopAppBarProps) {
           onClick={handleDrawerToggle}
           sx={{ mr: 2, display: { sm: "none" } }}
         >
-          <MdMenu />
+          <Icon icon={navigation24Regular} />
         </IconButton>
+        <Searchbar />
         <Box sx={{ flexGrow: 1 }} />
         <Stack direction="row" spacing={1}>
-          {/* <Searchbar /> */}
           <DarkModeButton />
-          <IconButton color="inherit">
-            <HiOutlineCog />
-          </IconButton>
+          {/* <IconButton color="inherit">
+            <Icon icon={settings24Regular} />
+          </IconButton> */}
         </Stack>
       </Toolbar>
     </AppBar>

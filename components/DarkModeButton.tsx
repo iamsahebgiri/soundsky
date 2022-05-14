@@ -2,7 +2,9 @@ import React from "react";
 import IconButton from "@mui/material/IconButton";
 import { useTheme } from "@mui/material/styles";
 import { ColorModeContext } from "utils/colorModeContext";
-import { HiMoon, HiSun } from "react-icons/hi";
+import { Icon } from "@iconify/react";
+import weatherMoon24Regular from "@iconify/icons-fluent/weather-moon-24-regular";
+import weatherSunny24Regular from "@iconify/icons-fluent/weather-sunny-24-regular";
 
 export default function DarkModeButton() {
   const theme = useTheme();
@@ -13,7 +15,11 @@ export default function DarkModeButton() {
       onClick={colorMode.toggleColorMode}
       color="inherit"
     >
-      {theme.palette.mode === "dark" ? <HiSun /> : <HiMoon />}
+      {theme.palette.mode === "dark" ? (
+        <Icon icon={weatherSunny24Regular} />
+      ) : (
+        <Icon icon={weatherMoon24Regular} />
+      )}
     </IconButton>
   );
 }

@@ -6,19 +6,38 @@ import MainLayout from "layouts/main";
 import Image from "next/image";
 import * as React from "react";
 
-const Item = styled("div")(({ theme }) => ({
-  color: theme.palette.grey[700],
-  fontWeight: 800,
-  "& img": {
-    borderRadius: theme.shape.borderRadius,
-  },
-}));
-
 const GridContainer = styled(Box)(({ theme }) => ({
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
   gridGap: theme.spacing(2),
 }));
+
+const Item = ({ children }: any) => {
+  return (
+    <Box
+      sx={{
+        fontWeight: 800,
+        "& img": {
+          borderRadius: 1,
+        },
+        cursor: "pointer",
+        color: (theme) =>
+          theme.palette.mode === "dark"
+            ? theme.palette.grey[300]
+            : theme.palette.grey[700],
+        willChange: "transform",
+        transform: "scale(1)",
+        "&:active": {
+          transform: "scale(0.98)",
+        },
+        animation: (theme) => theme.transitions.easing.easeInOut,
+        WebkitTapHighlightColor: "rgba(0,0,0,0)",
+      }}
+    >
+      {children}
+    </Box>
+  );
+};
 
 export default function Index() {
   return (
@@ -28,7 +47,7 @@ export default function Index() {
           {Array.from({ length: 30 }).map((_, i) => (
             <Item key={i}>
               <Image
-                src="https://i.scdn.co/image/ab67616d00001e0269154eeb4cc75a6008013552"
+                src="https://i.scdn.co/image/ab67706f000000033956f6d006763a6ee42c1bbf"
                 alt="Picture of the author"
                 width={300}
                 height={300}
@@ -39,6 +58,7 @@ export default function Index() {
             </Item>
           ))}
         </GridContainer>
+        <Box pb="4rem" />
       </Container>
     </MainLayout>
   );
