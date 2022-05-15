@@ -40,10 +40,7 @@ export default function BottomPlayer() {
           sx={{
             height: "4px",
             width: "20%",
-            background: (theme: Theme) =>
-              theme.palette.mode === "dark"
-                ? theme.palette.primary[800]
-                : theme.palette.primary[600],
+            background: (theme: Theme) => theme.palette.primary.main
           }}
         />
       </Box>

@@ -8,6 +8,7 @@ import { CacheProvider, EmotionCache } from "@emotion/react";
 import { getDesignTokens } from "theme";
 import createEmotionCache from "utils/createEmotionCache";
 import { ColorModeContext } from "utils/colorModeContext";
+import "lib/axios";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
