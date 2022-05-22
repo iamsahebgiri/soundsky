@@ -1,0 +1,141 @@
+import { Box } from "@mui/material";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import axios from "axios";
+import GridContainer from "components/GridContainer";
+import Item from "components/Item";
+import LoadingSkeleton from "components/LoadingSkeleton";
+import MainLayout from "layouts/main";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { Playlist, Track } from "utils/types";
+
+export default function CategoryPage() {
+  const [playlist, setPlaylist] = useState<Playlist>();
+  const [items, setItems] = useState<Track[]>([]);
+  const [tracks, setTracks] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const playlistId = router.query.id;
+
+  useEffect(() => {
+    setLoading(true);
+    const controller = new AbortController();
+
+    if (playlistId) {
+      axios
+        .get(`/playlists/${playlistId}?country=IN&limit=50`, {
+          signal: controller.signal,
+        })
+        .then((res) => {
+          setItems(res.data.tracks.items);
+          let tracks: Track[] = [];
+          res.data.tracks.items.map((item: any) => {
+            if (item.track.preview_url) {
+              let track: Track = {
+                type: "track",
+                id: item.track.id,
+                href: item.href,
+                images: item.track.album.images,
+                preview_url: item.track.preview_url,
+                name: item.track.name,
+                popularity: item.track.popularity,
+                extera_urls: item.track.external_urls,
+              };
+              tracks.push(track);
+            }
+          });
+          setTracks(tracks);
+          setPlaylist(res.data);
+          console.log(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+
+    return () => controller.abort();
+  }, [playlistId]);
+
+  if (loading) {
+    return (
+      <MainLayout>
+        <Container maxWidth="xl">
+          <LoadingSkeleton />
+        </Container>
+      </MainLayout>
+    );
+  }
+
+  return (
+    <MainLayout>
+      <Container maxWidth="xl">
+        {playlist && (
+          <Box
+            sx={{
+              background:
+                playlist.primary_color !== null &&
+                playlist.primary_color.toLowerCase() !== "#ffffff"
+                  ? `linear-gradient(to bottom, #eef2ff00 0%, ${playlist.primary_color} 100%)`
+                  : "linear-gradient(to bottom, #eef2ff00 0%, #64748b 100%)",
+              p: 2,
+              borderRadius: "0.5rem",
+              img: {
+                borderRadius: "0.4rem",
+              },
+              textAlign: {
+                xs: "center",
+                sm: "left",
+              },
+              mb: "2rem"
+            }}
+          >
+            <Image
+              src={playlist.images[0].url}
+              alt={playlist.name}
+              width={200}
+              height={200}
+            />
+            <Typography
+              sx={{
+                pt: "1rem",
+                fontSize: "1.6rem",
+                fontWeight: "600",
+                color: "white",
+              }}
+            >
+              {playlist?.name}
+            </Typography>
+            <Typography
+              sx={{
+                color: "#cbd5e1",
+              }}
+            >
+              {playlist?.description}
+            </Typography>
+          </Box>
+        )}
+
+        <GridContainer>
+          {tracks.map(({ id, name, images }: Track) => (
+            <Item key={id}>
+              <Image
+                src={images.length >= 2 ? images[1].url : images[0].url}
+                alt={name}
+                width={300}
+                height={300}
+                placeholder="blur"
+                blurDataURL={images[0].url}
+              />
+              <Typography>{name}</Typography>
+            </Item>
+          ))}
+        </GridContainer>
+      </Container>
+    </MainLayout>
+  );
+}

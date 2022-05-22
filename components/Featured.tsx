@@ -66,7 +66,7 @@ const Featured = () => {
 
       <GridContainer>
         {albums.map(({ id, name, images }: Album) => (
-          <Item key={id}>
+          <Item key={id} href={`/playlist/${id}`}>
             <Image
               src={images.length >= 2 ? images[1].url : images[0].url}
               alt={name}

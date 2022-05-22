@@ -1,12 +1,9 @@
-import home24Regular from "@iconify/icons-fluent/home-24-regular";
-import dumbbell24Regular from "@iconify/icons-fluent/dumbbell-24-regular";
-import heart24Regular from "@iconify/icons-fluent/heart-24-regular";
-import arrowTrending24Regular from "@iconify/icons-fluent/arrow-trending-24-regular";
-import games24Regular from "@iconify/icons-fluent/games-24-regular";
 import beach24Regular from "@iconify/icons-fluent/beach-24-regular";
-import trophy24Regular from "@iconify/icons-fluent/trophy-24-regular";
-import foodGrains24Regular from "@iconify/icons-fluent/food-grains-24-regular";
+import dumbbell24Regular from "@iconify/icons-fluent/dumbbell-24-regular";
 import folder24Regular from "@iconify/icons-fluent/folder-24-regular";
+import heart24Regular from "@iconify/icons-fluent/heart-24-regular";
+import home24Regular from "@iconify/icons-fluent/home-24-regular";
+import trophy24Regular from "@iconify/icons-fluent/trophy-24-regular";
 
 const libraries = [
   {
@@ -16,18 +13,8 @@ const libraries = [
   },
   {
     title: "Top",
-    href: "/category/top",
+    href: "/category/toplists",
     icon: trophy24Regular,
-  },
-  {
-    title: "Trendings",
-    href: "/category/trendings",
-    icon: arrowTrending24Regular,
-  },
-  {
-    title: "Gaming",
-    href: "/category/gaming",
-    icon: games24Regular,
   },
   {
     title: "Mood",
@@ -40,11 +27,6 @@ const libraries = [
     icon: beach24Regular,
   },
   {
-    title: "Focus",
-    href: "/category/focus",
-    icon: foodGrains24Regular,
-  },
-  {
     title: "Workout",
     href: "/category/workout",
     icon: dumbbell24Regular,
@@ -53,13 +35,8 @@ const libraries = [
 
 const playlists = [
   {
-    title: "Classical",
-    href: "/category/classical",
-    icon: folder24Regular,
-  },
-  {
-    title: "Bollywood",
-    href: "/category/bollywood",
+    title: "Rock",
+    href: "/category/rock",
     icon: folder24Regular,
   },
   {
@@ -67,16 +44,44 @@ const playlists = [
     href: "/category/party",
     icon: folder24Regular,
   },
+
   {
-    title: "Punjabi",
-    href: "/category/punjabi",
+    title: "EDM",
+    href: "/category/edm_dance",
     icon: folder24Regular,
   },
   {
-    title: "Telugu",
-    href: "/category/telugu",
+    title: "Hip-Hop",
+    href: "/category/hiphop",
+    icon: folder24Regular,
+  },
+
+  {
+    title: "Summer",
+    href: "/category/summer",
+    icon: folder24Regular,
+  },
+  {
+    title: "country",
+    href: "/category/country",
     icon: folder24Regular,
   },
 ];
 
-export { libraries, playlists };
+const getCategoryName = (href: string) => {
+  libraries.forEach((library) => {
+    if (library.href == href) {
+      return library.title;
+    }
+  });
+
+  playlists.forEach((playlist) => {
+    if (playlist.href == href) {
+      return playlist.title;
+    }
+  });
+
+  return null;
+};
+
+export { libraries, playlists, getCategoryName };

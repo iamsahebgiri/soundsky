@@ -1,7 +1,9 @@
 import React from "react";
 import Box from "@mui/material/Box";
+import { useRouter } from "next/router";
 
-export default function Item({ children }: any) {
+export default function Item({ children, href }: any) {
+  const router = useRouter();
   return (
     <Box
       sx={{
@@ -21,6 +23,11 @@ export default function Item({ children }: any) {
         },
         animation: (theme) => theme.transitions.easing.easeInOut,
         WebkitTapHighlightColor: "rgba(0,0,0,0)",
+      }}
+      onClick={() => {
+        if (href) {
+          router.push(href);
+        }
       }}
     >
       {children}

@@ -25,5 +25,18 @@ export interface Playlist {
   primary_color: string | null;
   external_urls: {
     spotify: string;
+  };
+}
+
+export interface Track {
+  href: string;
+  images: Image[];
+  id: string;
+  name: string;
+  preview_url: string;
+  popularity: number;
+  type: "track";
+  extera_urls: {
+    spotify: string;
   }
 }
