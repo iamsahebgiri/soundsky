@@ -1,24 +1,12 @@
 import Box from "@mui/material/Box";
-import Skeleton from "@mui/material/Skeleton";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { Category } from "utils/types";
 import GridContainer from "./GridContainer";
 import Item from "./Item";
-
-interface Icon {
-  height: number | null;
-  url: string;
-  width: number | null;
-}
-
-interface Category {
-  href: string;
-  icons: Icon[];
-  id: string;
-  name: string;
-}
+import LoadingSkeleton from "./LoadingSkeleton";
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
@@ -33,6 +21,7 @@ const Categories = () => {
       })
       .then((res) => {
         setCategories(res.data.categories.items);
+        console.log(res.data)
       })
       .catch((error) => {
         console.log(error);
@@ -43,34 +32,6 @@ const Categories = () => {
 
     return () => controller.abort();
   }, []);
-
-  const LoadingSkeleton = () => {
-    return (
-      <Box>
-        <Skeleton
-          height={64}
-          sx={{
-            mb: 2,
-            width: {
-              xs: "100%",
-              sm: "40%",
-            },
-          }}
-        />
-        <GridContainer>
-          {Array.from({ length: 6 }).map((_, i) => (
-            <Box key={i}>
-              <Skeleton height="160px" variant="rectangular" />
-              <Box sx={{ pt: 0.5 }}>
-                <Skeleton />
-                <Skeleton width="60%" />
-              </Box>
-            </Box>
-          ))}
-        </GridContainer>
-      </Box>
-    );
-  };
 
   if (loading) {
     return <LoadingSkeleton />;
@@ -89,7 +50,7 @@ const Categories = () => {
       </Typography>
 
       <GridContainer>
-        {categories.map(({ id, name, icons }: Category, i) => (
+        {categories.map(({ id, name, icons }: Category) => (
           <Item key={id}>
             <Image
               src={icons[0].url}

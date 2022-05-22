@@ -21,7 +21,7 @@ export default function MainLayout({ children }: any) {
           handleDrawerToggle={handleDrawerToggle}
           mobileOpen={mobileOpen}
         />
-        <Box component="main" sx={{ flexGrow: 1, py: 3 }}>
+        <Box component="main" sx={{ flexGrow: 1, py: 3, pb: 8 }}>
           <Toolbar />
           {children}
         </Box>

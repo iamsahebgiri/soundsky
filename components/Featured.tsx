@@ -1,11 +1,11 @@
 import Box from "@mui/material/Box";
-import Skeleton from "@mui/material/Skeleton";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import GridContainer from "./GridContainer";
 import Item from "./Item";
+import LoadingSkeleton from "./LoadingSkeleton";
 
 interface Image {
   height: number | null;
@@ -47,34 +47,6 @@ const Featured = () => {
 
     return () => controller.abort();
   }, []);
-
-  const LoadingSkeleton = () => {
-    return (
-      <Box>
-        <Skeleton
-          height={64}
-          sx={{
-            mb: 2,
-            width: {
-              xs: "100%",
-              sm: "40%",
-            },
-          }}
-        />
-        <GridContainer>
-          {Array.from({ length: 6 }).map((_, i) => (
-            <Box key={i}>
-              <Skeleton height="160px" variant="rectangular" />
-              <Box sx={{ pt: 0.5 }}>
-                <Skeleton />
-                <Skeleton width="60%" />
-              </Box>
-            </Box>
-          ))}
-        </GridContainer>
-      </Box>
-    );
-  };
 
   if (loading) {
     return <LoadingSkeleton />;

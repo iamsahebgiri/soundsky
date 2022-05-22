@@ -87,7 +87,6 @@ export default function Sidebar(props: Props) {
         variant="permanent"
         sx={{
           display: { xs: "none", sm: "block" },
-
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
             width: DRAWER_WIDTH,

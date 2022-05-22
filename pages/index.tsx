@@ -1,5 +1,4 @@
 import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Categories from "components/Categories";
 import NewReleases from "components/NewReleases";
@@ -16,7 +15,6 @@ export default function Index() {
           <Categories />
           <NewReleases />
         </Stack>
-        <Box pb="4rem" />
       </Container>
     </MainLayout>
   );

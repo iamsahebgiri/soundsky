@@ -16,7 +16,7 @@ export default function Searchbar() {
         alignItems: "center",
         width: {
           xs: "100%",
-          sm: "50%",
+          md: "50%",
         },
         background: (theme) =>
           theme.palette.mode === "dark"
