@@ -8,15 +8,19 @@ import LoadingSkeleton from "components/LoadingSkeleton";
 import MainLayout from "layouts/main";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { getAverageRGB, shadeColor } from "utils/colors";
 import { Playlist, Track } from "utils/types";
 
 export default function CategoryPage() {
   const [playlist, setPlaylist] = useState<Playlist>();
+  const [playlistCoverColor, setPlaylistCoverColor] =
+    useState<string>("#1e293b");
+  const [tracks, setTracks] = useState<Track[]>([]);
   const [items, setItems] = useState<Track[]>([]);
-  const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
   const playlistId = router.query.id;
 
   useEffect(() => {
@@ -41,7 +45,7 @@ export default function CategoryPage() {
                 preview_url: item.track.preview_url,
                 name: item.track.name,
                 popularity: item.track.popularity,
-                extera_urls: item.track.external_urls,
+                external_urls: item.track.external_urls,
               };
               tracks.push(track);
             }
@@ -71,6 +75,14 @@ export default function CategoryPage() {
     );
   }
 
+  const handlePlaylistBackground = (
+    e: React.SyntheticEvent<HTMLImageElement>
+  ) => {
+    if (e.target) {
+      setPlaylistCoverColor(getAverageRGB(e.target));
+    }
+  };
+
   return (
     <MainLayout>
       <Container maxWidth="xl">
@@ -81,8 +93,8 @@ export default function CategoryPage() {
                 playlist.primary_color !== null &&
                 playlist.primary_color.toLowerCase() !== "#ffffff"
                   ? `linear-gradient(to bottom, #eef2ff00 0%, ${playlist.primary_color} 100%)`
-                  : "linear-gradient(to bottom, #eef2ff00 0%, #64748b 100%)",
-              p: 2,
+                  : `linear-gradient(to bottom, ${playlistCoverColor}80 0%, ${playlistCoverColor} 100%)`,
+              p: 3,
               borderRadius: "0.5rem",
               img: {
                 borderRadius: "0.4rem",
@@ -91,7 +103,7 @@ export default function CategoryPage() {
                 xs: "center",
                 sm: "left",
               },
-              mb: "2rem"
+              mb: "2rem",
             }}
           >
             <Image
@@ -99,6 +111,7 @@ export default function CategoryPage() {
               alt={playlist.name}
               width={200}
               height={200}
+              onLoad={handlePlaylistBackground}
             />
             <Typography
               sx={{

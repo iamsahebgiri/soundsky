@@ -1,5 +1,10 @@
 const getLocalAccessToken = () => {
-  const accessToken = JSON.parse(localStorage.getItem("token")!);
+  let accessToken = null;
+  if (localStorage.getItem("token") !== null) {
+    console.log("Token exist");
+    accessToken = JSON.parse(localStorage.getItem("token") ?? "");
+  }
+
   return accessToken;
 };
 

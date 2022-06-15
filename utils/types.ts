@@ -36,7 +36,7 @@ export interface Track {
   preview_url: string;
   popularity: number;
   type: "track";
-  extera_urls: {
+  external_urls: {
     spotify: string;
   }
 }
