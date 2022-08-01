@@ -1,19 +1,16 @@
+import { Track } from "utils/types";
 import create from "zustand";
 
 interface SongState {
-  currentSong: string;
-  songs: [];
-  accessToken: string;
-  setCurrentSong: (song: string) => void;
-  setAccesToken: (token: string) => void;
+  currentSong: Track | null;
+  songs: Track[] | null;
+  setCurrentSong: (song: Track) => void;
 }
 
 const useStore = create<SongState>((set) => ({
-  currentSong: "",
-  accessToken: "",
-  songs: [],
+  currentSong: null,
+  songs: null,
   setCurrentSong: (song) => set((state) => ({ currentSong: song })),
-  setAccesToken: (token) => set((state) => ({ accessToken: token })),
 }));
 
 export { useStore };

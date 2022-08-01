@@ -8,9 +8,10 @@ import LoadingSkeleton from "components/LoadingSkeleton";
 import MainLayout from "layouts/main";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect, useRef, useState } from "react";
-import { getAverageRGB, shadeColor } from "utils/colors";
+import React, { useEffect, useState } from "react";
+import { getAverageRGB } from "utils/colors";
 import { Playlist, Track } from "utils/types";
+import { useStore } from "store";
 
 export default function CategoryPage() {
   const [playlist, setPlaylist] = useState<Playlist>();
@@ -20,6 +21,8 @@ export default function CategoryPage() {
   const [items, setItems] = useState<Track[]>([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+  const setCurrentSong = useStore((state) => state.setCurrentSong);
 
   const playlistId = router.query.id;
 
@@ -83,6 +86,10 @@ export default function CategoryPage() {
     }
   };
 
+  const handleOnClickSong = (song: Track) => {
+    setCurrentSong(song);
+  };
+
   return (
     <MainLayout>
       <Container maxWidth="xl">
@@ -134,19 +141,26 @@ export default function CategoryPage() {
         )}
 
         <GridContainer>
-          {tracks.map(({ id, name, images }: Track) => (
-            <Item key={id}>
-              <Image
-                src={images.length >= 2 ? images[1].url : images[0].url}
-                alt={name}
-                width={300}
-                height={300}
-                placeholder="blur"
-                blurDataURL={images[0].url}
-              />
-              <Typography>{name}</Typography>
-            </Item>
-          ))}
+          {tracks.map((track) => {
+            const { id, name, images, preview_url } = track;
+            if (preview_url) {
+              return (
+                <Box key={id} onClick={() => handleOnClickSong(track)}>
+                  <Item>
+                    <Image
+                      src={images.length >= 2 ? images[1].url : images[0].url}
+                      alt={name}
+                      width={300}
+                      height={300}
+                      placeholder="blur"
+                      blurDataURL={images[0].url}
+                    />
+                    <Typography>{name}</Typography>
+                  </Item>
+                </Box>
+              );
+            }
+          })}
         </GridContainer>
       </Container>
     </MainLayout>

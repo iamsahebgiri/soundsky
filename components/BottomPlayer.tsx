@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -9,8 +9,14 @@ import Image from "next/image";
 import { Icon } from "@iconify/react";
 import arrowDownload24Regular from "@iconify/icons-fluent/arrow-download-24-regular";
 import play24Regular from "@iconify/icons-fluent/play-24-regular";
+import { useStore } from "store";
+import AudioPlayer from "./AudioPlayer";
 
 export default function BottomPlayer() {
+  const currentTrack = useStore((state) => state.currentSong);
+
+  console.log(currentTrack)
+
   return (
     <AppBar
       position="fixed"
@@ -40,7 +46,7 @@ export default function BottomPlayer() {
           sx={{
             height: "4px",
             width: "20%",
-            background: (theme: Theme) => theme.palette.primary.main
+            background: (theme: Theme) => theme.palette.primary.main,
           }}
         />
       </Box>
@@ -141,6 +147,7 @@ export default function BottomPlayer() {
           </Box>
         </Box>
       </Toolbar>
+      {currentTrack && <AudioPlayer track={currentTrack} />}
     </AppBar>
   );
 }
